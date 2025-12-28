@@ -212,11 +212,11 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
                 <Link
                   key={pkg._id}
                   href={`/packages/${pkg.slug.current}`}
-                  className="flex-shrink-0 w-80 group"
+                  className="flex-shrink-0 w-80 group h-full"
                 >
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    {/* Image */}
-                    <div className="relative w-full h-64 overflow-hidden">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full flex flex-col">
+                    {/* Image - Fixed height */}
+                    <div className="relative w-full h-56 overflow-hidden flex-shrink-0">
                       <Image
                         src={imageUrl}
                         alt={pkg.title}
@@ -225,20 +225,20 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
                       />
                     </div>
 
-                    {/* Content */}
-                    <div className="p-6">
+                    {/* Content - Flex grow to fill remaining space */}
+                    <div className="p-6 flex flex-col flex-grow">
                       {/* Package Title */}
-                      <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
                         {pkg.title}
                       </h3>
 
                       {/* Rating and Reviews */}
-                      <div className="flex items-center gap-2 mb-4">
+                      <div className="flex items-center gap-2 mb-3">
                         <div className="flex items-center">
                           {[...Array(5)].map((_, i) => (
                             <svg
                               key={i}
-                              className={`w-5 h-5 ${
+                              className={`w-4 h-4 ${
                                 i < rating
                                   ? "text-yellow-400 fill-yellow-400"
                                   : "text-gray-300"
@@ -256,59 +256,53 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
                       </div>
 
                       {/* Location and Duration */}
-                      <div className="space-y-2 mb-4">
-                        {pkg.destination && (
-                          <div className="flex items-center gap-2 text-gray-700">
-                            <svg
-                              className="w-5 h-5 text-payaana-pink"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                              <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            <span className="text-sm font-medium">
-                              {pkg.destination.name}
-                            </span>
-                          </div>
-                        )}
-                        {pkg.duration && (
-                          <div className="flex items-center gap-2 text-gray-700">
-                            <svg
-                              className="w-5 h-5 text-payaana-pink"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span className="text-sm font-medium">
-                              {pkg.duration}
-                            </span>
-                          </div>
-                        )}
+                      <div className="space-y-2 mb-4 flex-grow">
+                        <div className="flex items-center gap-2 text-gray-700">
+                          <svg
+                            className="w-5 h-5 text-payaana-pink flex-shrink-0"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          <span className="text-sm font-medium">
+                            {pkg.destination?.name || "Various Locations"}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-700">
+                          <svg
+                            className="w-5 h-5 text-payaana-pink flex-shrink-0"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span className="text-sm font-medium">
+                            {pkg.duration || "Flexible Duration"}
+                          </span>
+                        </div>
                       </div>
 
-                      {/* Price */}
-                      {pkg.price && (
-                        <div className="pt-3 border-t border-gray-200">
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs text-gray-500">
-                              Starting from
-                            </span>
-                            <span className="text-2xl font-bold text-payaana-pink">
-                              ₹{pkg.price.toLocaleString()}
-                            </span>
-                          </div>
+                      {/* Price - Always at bottom */}
+                      <div className="pt-3 border-t border-gray-200 mt-auto">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs text-gray-500">
+                            Starting from
+                          </span>
+                          <span className="text-xl font-bold text-payaana-pink">
+                            ₹{(pkg.price || 0).toLocaleString()}
+                          </span>
                         </div>
-                      )}
+                      </div>
                     </div>
                   </div>
                 </Link>

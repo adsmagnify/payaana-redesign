@@ -38,7 +38,7 @@ export default function Header() {
           {/* Get Started button in pink rounded pill - positioned absolute right */}
           <div className="hidden lg:flex items-center absolute right-0">
             <Link href="/packages">
-              <button className="bg-payaana-pink hover:bg-payaana-pink-dark text-white px-6 py-3 rounded-full font-semibold transition-colors shadow-lg">
+              <button className="bg-white hover:bg-gray-100 text-payaana-pink px-6 py-3 rounded-full font-semibold transition-colors shadow-lg">
                 Get Started
               </button>
             </Link>

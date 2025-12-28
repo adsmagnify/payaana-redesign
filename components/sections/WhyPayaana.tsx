@@ -1,19 +1,19 @@
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function WhyPayaana() {
   const features = [
     {
-      image: '/packages.png',
+      image: "/packages.png",
       title: "Personalized Packages",
       description: "Tailored travel experiences designed just for you",
     },
     {
-      image: '/services.png',
+      image: "/services.png",
       title: "Services at Your Doorstep",
-      description: "Convenient booking and support wherever you are",
+      description: "Easy booking and reliable support, anytime, anywhere",
     },
     {
-      image: '/prices.png',
+      image: "/prices.png",
       title: "Pocket-Friendly Prices",
       description: "Affordable travel packages without compromising quality",
     },
@@ -22,7 +22,7 @@ export default function WhyPayaana() {
       title: "Super Fast Service",
       description: "Quick bookings and instant confirmations",
     },
-  ]
+  ];
 
   return (
     <section className="py-24 bg-gradient-to-b from-white to-gray-50">
@@ -38,15 +38,12 @@ export default function WhyPayaana() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className="group relative"
-            >
-              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+            <div key={index} className="group relative flex">
+              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 w-full flex flex-col">
                 {/* Icon/Image Container */}
-                <div className="relative w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                <div className="relative w-28 h-24 mx-auto mb-6 flex items-center justify-center flex-shrink-0">
                   {feature.image ? (
                     <div className="relative w-full h-full">
                       <Image
@@ -58,17 +55,17 @@ export default function WhyPayaana() {
                     </div>
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
-                      <svg 
-                        className="w-12 h-12 text-white" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
+                      <svg
+                        className="w-12 h-12 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
                         stroke="currentColor"
                       >
-                        <path 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          strokeWidth={2} 
-                          d="M13 10V3L4 14h7v7l9-11h-7z" 
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
                         />
                       </svg>
                     </div>
@@ -76,7 +73,7 @@ export default function WhyPayaana() {
                 </div>
 
                 {/* Content */}
-                <div className="text-center">
+                <div className="text-center flex-grow flex flex-col justify-center">
                   <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-payaana-pink transition-colors">
                     {feature.title}
                   </h3>
@@ -93,6 +90,5 @@ export default function WhyPayaana() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

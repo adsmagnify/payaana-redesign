@@ -41,7 +41,6 @@ sanity init
 ```
 
 4. The schemas are already configured in `sanity/schemas/`:
-
    - `package.ts` - For travel packages
    - `destination.ts` - For destinations
 
@@ -138,7 +137,6 @@ Edit `tailwind.config.ts` to customize the color palette. The Payaana pink color
 All dynamic content is managed through Sanity CMS. Static content can be edited in:
 
 - `app/about/page.tsx` - About page
-- `components/sections/Testimonials.tsx` - Testimonials
 - `components/layout/Footer.tsx` - Footer content
 
 ## Troubleshooting
