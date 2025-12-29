@@ -88,7 +88,7 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
             slug: { current: "kerala-backwaters" },
             mainImage: null,
             imageUrl:
-              "https://images.unsplash.com/photo-1539650116574-75c0c6d73aa6?w=800&q=80",
+              "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
             price: 15000,
             duration: "5 Day / 4 Nights",
             destination: { name: "Kerala" },
@@ -101,7 +101,7 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
             slug: { current: "chicago-city-tour" },
             mainImage: null,
             imageUrl:
-              "https://images.unsplash.com/photo-1494522358652-f3ccd6c73ea3?w=800&q=80",
+              "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
             price: 89000,
             duration: "8 Day / 7 Nights",
             destination: { name: "Chicago" },

@@ -55,7 +55,7 @@ export default function PopularDestinations() {
     },
     {
       id: 6,
-      image: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73aa6?w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80',
       name: 'Kerala',
       rating: 5,
       reviews: 38,

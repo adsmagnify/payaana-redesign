@@ -63,7 +63,6 @@ export default function AboutPage() {
             muted
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
-            poster="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1920&h=1080&fit=crop"
           >
             <source src="/about-hero.mp4" type="video/mp4" />
           </video>
