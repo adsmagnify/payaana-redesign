@@ -1,10 +1,15 @@
+"use client";
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 interface NavigationProps {
   mobile?: boolean
 }
 
 export default function Navigation({ mobile = false }: NavigationProps) {
+  const pathname = usePathname()
+  
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About Us' },
@@ -18,9 +23,20 @@ export default function Navigation({ mobile = false }: NavigationProps) {
     ? 'flex flex-col space-y-2 px-4'
     : 'flex items-center space-x-8'
 
-  const linkClasses = mobile
-    ? 'text-gray-700 hover:text-payaana-pink transition-colors font-medium py-2'
-    : 'text-gray-700 hover:text-payaana-pink transition-colors font-medium'
+  const getLinkClasses = (href: string) => {
+    const isActive = href === '/' 
+      ? pathname === '/' 
+      : pathname.startsWith(href)
+    
+    const activeClasses = isActive 
+      ? 'text-payaana-pink font-semibold' 
+      : 'text-gray-700'
+    
+    if (mobile) {
+      return `${activeClasses} hover:text-payaana-pink transition-colors font-medium py-2`
+    }
+    return `${activeClasses} hover:text-payaana-pink transition-colors font-medium`
+  }
 
   return (
     <ul className={baseClasses}>
@@ -28,7 +44,7 @@ export default function Navigation({ mobile = false }: NavigationProps) {
         <li key={item.href}>
           <Link
             href={item.href}
-            className={linkClasses}
+            className={getLinkClasses(item.href)}
           >
             {item.label}
           </Link>

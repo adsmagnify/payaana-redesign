@@ -32,7 +32,9 @@ export default function AnimatedCounter({
   const { number: targetNumber, suffix } = parseValue(value);
 
   useEffect(() => {
-    // Intersection Observer to trigger animation when in view
+    const node = counterRef.current;
+    if (!node) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -44,14 +46,10 @@ export default function AnimatedCounter({
       { threshold: 0.1 }
     );
 
-    if (counterRef.current) {
-      observer.observe(counterRef.current);
-    }
+    observer.observe(node);
 
     return () => {
-      if (counterRef.current) {
-        observer.unobserve(counterRef.current);
-      }
+      observer.unobserve(node);
     };
   }, [isVisible]);
 
@@ -84,10 +82,12 @@ export default function AnimatedCounter({
   }, [isVisible, targetNumber, duration, startValue]);
 
   return (
-    <div ref={counterRef} className="text-4xl md:text-5xl font-bold text-white mb-2">
+    <div
+      ref={counterRef}
+      className="text-4xl md:text-5xl font-bold text-white mb-2"
+    >
       {count}
       {suffix}
     </div>
   );
 }
-
