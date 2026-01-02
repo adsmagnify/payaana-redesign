@@ -1,5 +1,7 @@
 import PackageSearchHero from "@/components/sections/PackageSearchHero";
 import PackageCategorySection from "@/components/sections/PackageCategorySection";
+import PackageFilters from "@/components/sections/PackageFilters";
+import { Suspense } from "react";
 
 // Dummy data - structured to match Sanity package schema
 // This will be replaced with Sanity queries later
@@ -7,7 +9,8 @@ import PackageCategorySection from "@/components/sections/PackageCategorySection
 const specialisedDestinations = [
   {
     _id: "spec-1",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
     name: "Maldives",
     rating: 5,
     reviews: 42,
@@ -17,7 +20,8 @@ const specialisedDestinations = [
   },
   {
     _id: "spec-2",
-    image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&q=80",
     name: "Santorini",
     rating: 5,
     reviews: 38,
@@ -27,7 +31,8 @@ const specialisedDestinations = [
   },
   {
     _id: "spec-3",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
     name: "Bali",
     rating: 4,
     reviews: 56,
@@ -37,7 +42,8 @@ const specialisedDestinations = [
   },
   {
     _id: "spec-4",
-    image: "https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=800&q=80",
     name: "Iceland",
     rating: 5,
     reviews: 29,
@@ -50,7 +56,8 @@ const specialisedDestinations = [
 const internationalPackages = [
   {
     _id: "int-1",
-    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80",
     name: "France",
     rating: 4,
     reviews: 15,
@@ -60,7 +67,8 @@ const internationalPackages = [
   },
   {
     _id: "int-2",
-    image: "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800&q=80",
     name: "Switzerland",
     rating: 5,
     reviews: 15,
@@ -70,7 +78,8 @@ const internationalPackages = [
   },
   {
     _id: "int-3",
-    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
     name: "Germany",
     rating: 4,
     reviews: 10,
@@ -80,7 +89,8 @@ const internationalPackages = [
   },
   {
     _id: "int-4",
-    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80",
     name: "Japan",
     rating: 5,
     reviews: 28,
@@ -90,7 +100,8 @@ const internationalPackages = [
   },
   {
     _id: "int-5",
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
     name: "Dubai",
     rating: 4,
     reviews: 35,
@@ -100,7 +111,8 @@ const internationalPackages = [
   },
   {
     _id: "int-6",
-    image: "https://images.unsplash.com/photo-1492571350019-22de08371fd3?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1492571350019-22de08371fd3?w=800&q=80",
     name: "Thailand",
     rating: 5,
     reviews: 48,
@@ -113,7 +125,8 @@ const internationalPackages = [
 const domesticPackages = [
   {
     _id: "dom-1",
-    image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
     name: "Kerala",
     rating: 5,
     reviews: 38,
@@ -123,7 +136,8 @@ const domesticPackages = [
   },
   {
     _id: "dom-2",
-    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
     name: "Goa",
     rating: 5,
     reviews: 42,
@@ -133,7 +147,8 @@ const domesticPackages = [
   },
   {
     _id: "dom-3",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
     name: "Manali",
     rating: 4,
     reviews: 35,
@@ -143,7 +158,8 @@ const domesticPackages = [
   },
   {
     _id: "dom-4",
-    image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
     name: "Rajasthan",
     rating: 4,
     reviews: 32,
@@ -153,7 +169,8 @@ const domesticPackages = [
   },
   {
     _id: "dom-5",
-    image: "https://images.unsplash.com/photo-1588416381073-3c0b5b0b5b0b?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1588416381073-3c0b5b0b5b0b?w=800&q=80",
     name: "Darjeeling",
     rating: 4,
     reviews: 27,
@@ -163,7 +180,8 @@ const domesticPackages = [
   },
   {
     _id: "dom-6",
-    image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
     name: "Shimla",
     rating: 4,
     reviews: 29,
@@ -176,7 +194,8 @@ const domesticPackages = [
 const fixedDepartures = [
   {
     _id: "fix-1",
-    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80",
     name: "Europe Tour",
     rating: 5,
     reviews: 18,
@@ -186,7 +205,8 @@ const fixedDepartures = [
   },
   {
     _id: "fix-2",
-    image: "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800&q=80",
     name: "Swiss Alps",
     rating: 5,
     reviews: 12,
@@ -196,7 +216,8 @@ const fixedDepartures = [
   },
   {
     _id: "fix-3",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
     name: "South India",
     rating: 4,
     reviews: 25,
@@ -206,7 +227,8 @@ const fixedDepartures = [
   },
   {
     _id: "fix-4",
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
     name: "Dubai Special",
     rating: 4,
     reviews: 20,
@@ -219,8 +241,33 @@ const fixedDepartures = [
 export default function PackagesPage() {
   return (
     <main className="overflow-hidden">
-      {/* Hero Search Section */}
+      {/* Hero Section */}
       <PackageSearchHero />
+
+      {/* Search Section */}
+      <section id="packages" className="py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 tracking-tight">
+            Search Packages
+          </h2>
+          <Suspense
+            fallback={
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  {[...Array(4)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="h-10 bg-gray-200 rounded animate-pulse"
+                    />
+                  ))}
+                </div>
+              </div>
+            }
+          >
+            <PackageFilters />
+          </Suspense>
+        </div>
+      </section>
 
       {/* Specialised Destination Section */}
       <PackageCategorySection

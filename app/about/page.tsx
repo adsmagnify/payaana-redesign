@@ -123,10 +123,6 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Decorative elements */}
-              <div className="absolute -top-6 -left-6 w-24 h-24 bg-payaana-pink/20 rounded-full blur-2xl" />
-              <div className="absolute -bottom-10 left-1/2 w-32 h-32 bg-yellow-400/20 rounded-full blur-2xl" />
             </div>
 
             {/* Right - Content */}
@@ -218,7 +214,7 @@ export default function AboutPage() {
                     )}
                   </div>
 
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-payaana-pink transition-colors">
+                  <h3 className="text-2xl font-bold text-gray-900 -mt-7 mb-3 group-hover:text-payaana-pink transition-colors">
                     {service.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
@@ -341,12 +337,6 @@ export default function AboutPage() {
 
       {/* CTA Section */}
       <section className="pt-24 pb-20 bg-gradient-to-br from-payaana-pink via-rose-500 to-pink-600 relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-        </div>
-
         <div className="container mx-auto px-4 relative z-10 text-center">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Ready to Start Your Adventure?

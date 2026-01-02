@@ -36,15 +36,15 @@ export default function PackageCategorySection({
       : "bg-white";
 
   return (
-    <section className={`py-20 ${bgClass}`}>
+      <section className={`py-20 ${bgClass}`}>
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div className="text-left mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
             {title}
           </h2>
           {subtitle && (
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl">
               {subtitle}
             </p>
           )}
