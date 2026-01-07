@@ -32,9 +32,9 @@ export default function WhyPayaana() {
             WHY PAYAANA?
           </h2>
           <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-16 h-0.5 bg-payaana-pink"></div>
-            <div className="w-2 h-2 rounded-full bg-payaana-pink"></div>
-            <div className="w-16 h-0.5 bg-payaana-pink"></div>
+            <div className="w-16 h-0.5 bg-brand-purple"></div>
+            <div className="w-2 h-2 rounded-full bg-brand-purple"></div>
+            <div className="w-16 h-0.5 bg-brand-purple"></div>
           </div>
         </div>
 
@@ -74,7 +74,7 @@ export default function WhyPayaana() {
 
                 {/* Content */}
                 <div className="text-center flex-grow flex flex-col justify-center">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-payaana-pink transition-colors">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-purple transition-colors">
                     {feature.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
@@ -83,7 +83,7 @@ export default function WhyPayaana() {
                 </div>
 
                 {/* Decorative element */}
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-payaana-pink group-hover:w-16 transition-all duration-300 rounded-full"></div>
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-brand-purple group-hover:w-16 transition-all duration-300 rounded-full"></div>
               </div>
             </div>
           ))}

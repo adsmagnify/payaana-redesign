@@ -1,8 +1,8 @@
 import { defineField, defineType } from "sanity";
 
 export default defineType({
-  name: "package",
-  title: "Package",
+  name: "packages",
+  title: "Packages",
   type: "document",
   fields: [
     defineField({
@@ -69,6 +69,23 @@ export default defineType({
         layout: "radio",
       },
       description: "Category for organizing packages on the packages page",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "isFeatured",
+      title: "Is Featured",
+      type: "boolean",
+      description: "Mark as featured to show on home page",
+      initialValue: false,
+    }),
+    defineField({
+      name: "displayOrder",
+      title: "Display Order",
+      type: "number",
+      description:
+        "Order in which packages appear within category (lower numbers first)",
+      validation: (Rule) => Rule.min(0),
+      initialValue: 0,
     }),
     defineField({
       name: "highlights",
@@ -105,15 +122,35 @@ export default defineType({
       title: "title",
       media: "mainImage",
       destination: "destination.name",
+      category: "category",
+      isFeatured: "isFeatured",
     },
-    prepare({ title, media, destination }) {
+    prepare({ title, media, destination, category, isFeatured }) {
+      const categoryLabels: Record<string, string> = {
+        international: "International",
+        domestic: "Domestic",
+        fixedDeparture: "Fixed Departure",
+        specialised: "Specialised",
+      };
+      const categoryLabel = categoryLabels[category] || category;
+      const featuredLabel = isFeatured ? "⭐ Featured" : "";
       return {
         title,
-        subtitle: destination
-          ? `Destination: ${destination}`
-          : "No destination",
+        subtitle: `${categoryLabel}${destination ? ` • ${destination}` : ""}${featuredLabel ? ` • ${featuredLabel}` : ""}`,
         media,
       };
     },
   },
+  orderings: [
+    {
+      title: "Display Order",
+      name: "displayOrderAsc",
+      by: [{ field: "displayOrder", direction: "asc" }],
+    },
+    {
+      title: "Title",
+      name: "titleAsc",
+      by: [{ field: "title", direction: "asc" }],
+    },
+  ],
 });

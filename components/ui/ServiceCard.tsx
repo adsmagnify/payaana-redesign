@@ -54,7 +54,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           )}
         </div>
 
-        <h3 className="text-2xl font-bold text-gray-900 -mt-7 mb-3 group-hover:text-payaana-pink transition-colors">
+        <h3 className="text-2xl font-bold text-gray-900 -mt-7 mb-3 group-hover:text-brand-purple transition-colors">
           {service.title}
         </h3>
         <p className="text-gray-600 leading-relaxed">

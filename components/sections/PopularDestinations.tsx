@@ -101,7 +101,7 @@ export default function PopularDestinations() {
                 e.stopPropagation()
                 scroll('left')
               }}
-              className="w-12 h-12 rounded-full bg-gray-100 hover:bg-payaana-pink hover:text-white flex items-center justify-center transition-colors shadow-md cursor-pointer z-10"
+              className="w-12 h-12 rounded-full bg-gray-100 hover:bg-brand-purple hover:text-white flex items-center justify-center transition-colors shadow-md cursor-pointer z-10"
               aria-label="Scroll left"
               type="button"
             >
@@ -123,7 +123,7 @@ export default function PopularDestinations() {
                 e.stopPropagation()
                 scroll('right')
               }}
-              className="w-12 h-12 rounded-full bg-gray-100 hover:bg-payaana-pink hover:text-white flex items-center justify-center transition-colors shadow-md cursor-pointer z-10"
+              className="w-12 h-12 rounded-full bg-gray-100 hover:bg-brand-purple hover:text-white flex items-center justify-center transition-colors shadow-md cursor-pointer z-10"
               aria-label="Scroll right"
               type="button"
             >
@@ -204,7 +204,7 @@ export default function PopularDestinations() {
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 text-gray-700">
                       <svg
-                        className="w-5 h-5 text-payaana-pink"
+                        className="w-5 h-5 text-brand-purple"
                         fill="none"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -219,7 +219,7 @@ export default function PopularDestinations() {
                     </div>
                     <div className="flex items-center gap-2 text-gray-700">
                       <svg
-                        className="w-5 h-5 text-payaana-pink"
+                        className="w-5 h-5 text-brand-purple"
                         fill="none"
                         strokeLinecap="round"
                         strokeLinejoin="round"

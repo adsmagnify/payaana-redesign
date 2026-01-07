@@ -38,7 +38,7 @@ export default function PackageFilters() {
             placeholder="Search packages..."
             value={filters.search}
             onChange={(e) => handleFilterChange('search', e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-payaana-pink focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent"
           />
         </div>
 
@@ -49,7 +49,7 @@ export default function PackageFilters() {
           <select
             value={filters.destination}
             onChange={(e) => handleFilterChange('destination', e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-payaana-pink focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent"
           >
             <option value="">All Destinations</option>
             <option value="himachal">Himachal Pradesh</option>
@@ -66,7 +66,7 @@ export default function PackageFilters() {
           <select
             value={filters.priceRange}
             onChange={(e) => handleFilterChange('priceRange', e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-payaana-pink focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent"
           >
             <option value="">Any Price</option>
             <option value="0-10000">Under ₹10,000</option>
@@ -83,7 +83,7 @@ export default function PackageFilters() {
           <select
             value={filters.duration}
             onChange={(e) => handleFilterChange('duration', e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-payaana-pink focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent"
           >
             <option value="">Any Duration</option>
             <option value="1-3">1-3 Days</option>

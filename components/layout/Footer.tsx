@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-2xl font-bold text-payaana-pink mb-4">PAYAANA</h3>
+            <h3 className="text-2xl font-bold text-brand-purple mb-4">PAYAANA</h3>
             <p className="text-gray-400">
               Your trusted partner in creating unforgettable travel experiences.
             </p>
@@ -16,22 +16,22 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <Link href="/packages" className="hover:text-payaana-pink transition-colors">
+                <Link href="/packages" className="hover:text-brand-purple transition-colors">
                   Packages
                 </Link>
               </li>
               <li>
-                <Link href="/destinations" className="hover:text-payaana-pink transition-colors">
+                <Link href="/destinations" className="hover:text-brand-purple transition-colors">
                   Destinations
                 </Link>
               </li>
               <li>
-                <Link href="/gallery" className="hover:text-payaana-pink transition-colors">
+                <Link href="/gallery" className="hover:text-brand-purple transition-colors">
                   Gallery
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-payaana-pink transition-colors">
+                <Link href="/about" className="hover:text-brand-purple transition-colors">
                   About
                 </Link>
               </li>
@@ -51,7 +51,7 @@ export default function Footer() {
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="text-gray-400 hover:text-payaana-pink transition-colors"
+                className="text-gray-400 hover:text-brand-purple transition-colors"
                 aria-label="Facebook"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -60,7 +60,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-payaana-pink transition-colors"
+                className="text-gray-400 hover:text-brand-purple transition-colors"
                 aria-label="Instagram"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -69,7 +69,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-payaana-pink transition-colors"
+                className="text-gray-400 hover:text-brand-purple transition-colors"
                 aria-label="Twitter"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">

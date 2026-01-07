@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { getServices } from "@/lib/sanity/queries";
-import { services as fallbackServices } from "@/lib/data/services";
 import ServiceCard from "@/components/ui/ServiceCard";
 
 export const metadata: Metadata = {
@@ -13,22 +12,8 @@ export const metadata: Metadata = {
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export default async function ServicesPage() {
-  // Fetch services from Sanity, fallback to static data
-  let services = await getServices();
-
-  // If no services from Sanity, use fallback
-  if (!services || services.length === 0) {
-    services = fallbackServices.map((service) => ({
-      _id: service.slug,
-      title: service.title,
-      slug: { current: service.slug },
-      shortDescription: service.shortDescription,
-      fullDescription: service.fullDescription,
-      icon: service.icon,
-      colorGradient: service.colorGradient,
-      category: service.category,
-    }));
-  }
+  // Fetch services from Sanity
+  const services = await getServices();
   return (
     <main className="overflow-hidden">
       {/* Hero Section - Video Background */}
@@ -42,7 +27,7 @@ export default async function ServicesPage() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           >
-            <source src="/services-hero2.mp4" type="video/mp4" />
+            <source src="/services-hero.webm" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
@@ -51,7 +36,7 @@ export default async function ServicesPage() {
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight">
             Our{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-payaana-pink to-yellow-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-light-pink">
               Services
             </span>
           </h1>
@@ -63,7 +48,7 @@ export default async function ServicesPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/packages"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-payaana-pink text-white font-semibold rounded-full hover:bg-payaana-pink-dark transition-all duration-300 hover:shadow-lg hover:shadow-payaana-pink/30"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-brand-purple text-white font-semibold rounded-full hover:bg-brand-purple-dark transition-all duration-300 hover:shadow-lg hover:shadow-brand-purple/30"
             >
               Explore Packages
             </Link>
@@ -81,8 +66,8 @@ export default async function ServicesPage() {
       <section className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-block mb-4 px-4 py-1.5 bg-payaana-pink/10 rounded-full">
-              <span className="text-payaana-pink font-semibold text-sm uppercase tracking-wider">
+            <div className="inline-block mb-4 px-4 py-1.5 bg-brand-purple/10 rounded-full">
+              <span className="text-brand-purple font-semibold text-sm uppercase tracking-wider">
                 One-Stop Travel Solution
               </span>
             </div>
@@ -113,7 +98,7 @@ export default async function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-payaana-pink via-rose-500 to-pink-600 relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-br from-brand-purple via-brand-purple to-brand-purple-dark relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10 text-center">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Ready to Start Your Journey?
@@ -125,7 +110,7 @@ export default async function ServicesPage() {
           <div className="flex flex-wrap justify-center gap-6">
             <Link
               href="/packages"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-white text-payaana-pink font-bold text-lg rounded-full hover:bg-gray-100 transition-all duration-300 hover:shadow-2xl hover:scale-105 group"
+              className="inline-flex items-center gap-2 px-10 py-5 bg-white text-brand-purple font-bold text-lg rounded-full hover:bg-gray-100 transition-all duration-300 hover:shadow-2xl hover:scale-105 group"
             >
               Browse Packages
               <svg

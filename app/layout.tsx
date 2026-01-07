@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const dmSans = DM_Sans({ 
+  subsets: ["latin"], 
+  variable: "--font-dm-sans",
+  weight: ["400", "700"], // Regular and Bold
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Payaana - Adventure Travel",
@@ -17,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} font-sans`}>
+    <html lang="en" className={dmSans.variable}>
+      <body className="font-sans">
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />

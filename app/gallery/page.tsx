@@ -39,7 +39,7 @@ export default function GalleryPage() {
             onClick={() => setFilter(category)}
             className={`px-6 py-2 rounded-full transition-colors ${
               filter === category
-                ? 'bg-payaana-pink text-white'
+                ? 'bg-brand-purple text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >

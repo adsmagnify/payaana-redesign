@@ -14,7 +14,7 @@ export default function PackageSearchHero() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/packages-hero.mp4" type="video/mp4" />
+          <source src="/packages-hero.webm" type="video/webm" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/70" />
       </div>
@@ -26,7 +26,7 @@ export default function PackageSearchHero() {
             {/* Main Headline */}
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight">
               Discover Your{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-payaana-pink to-yellow-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-light-pink">
                 Dream
               </span>
               <br />
@@ -43,7 +43,7 @@ export default function PackageSearchHero() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="#packages"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-payaana-pink text-white font-semibold rounded-full hover:bg-payaana-pink-dark transition-all duration-300 hover:shadow-lg hover:shadow-payaana-pink/30"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-purple text-white font-semibold rounded-full hover:bg-brand-purple-dark transition-all duration-300 hover:shadow-lg hover:shadow-brand-purple/30"
               >
                 Explore Packages
               </Link>

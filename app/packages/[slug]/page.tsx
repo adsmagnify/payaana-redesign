@@ -99,7 +99,7 @@ export default async function PackageDetailPage({
           {packageData.price && (
             <div className="bg-gray-50 p-4 rounded-lg">
               <p className="text-sm text-gray-600">Starting from</p>
-              <p className="text-xl font-semibold text-payaana-pink">
+              <p className="text-xl font-semibold text-brand-purple">
                 ₹{packageData.price}
               </p>
             </div>
@@ -143,7 +143,7 @@ export default async function PackageDetailPage({
               {packageData.itinerary.map((day, index) => (
                 <div
                   key={index}
-                  className="border-l-4 border-payaana-pink pl-4"
+                  className="border-l-4 border-brand-purple pl-4"
                 >
                   <h3 className="text-xl font-semibold text-gray-900">
                     Day {index + 1}

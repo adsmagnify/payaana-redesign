@@ -16,9 +16,9 @@ export default function Button({
   const baseClasses = 'font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2'
   
   const variantClasses = {
-    primary: 'bg-payaana-pink text-white hover:bg-payaana-pink-dark focus:ring-payaana-pink',
-    secondary: 'bg-white text-payaana-pink hover:bg-gray-50 focus:ring-payaana-pink',
-    outline: 'border-2 border-white text-white hover:bg-white hover:text-payaana-pink focus:ring-white',
+    primary: 'bg-brand-purple text-white hover:bg-brand-purple-dark focus:ring-brand-purple',
+    secondary: 'bg-white text-brand-purple hover:bg-gray-50 focus:ring-brand-purple',
+    outline: 'border-2 border-white text-white hover:bg-white hover:text-brand-purple focus:ring-white',
   }
   
   const sizeClasses = {

@@ -42,7 +42,7 @@ export default function PackageCard({ package: pkg }: PackageCardProps) {
               <span className="text-sm text-gray-600">{pkg.duration}</span>
             )}
             {pkg.price && (
-              <span className="text-lg font-semibold text-payaana-pink">
+              <span className="text-lg font-semibold text-brand-purple">
                 ₹{pkg.price.toLocaleString()}
               </span>
             )}

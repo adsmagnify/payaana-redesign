@@ -25,90 +25,8 @@ interface FeaturedPackagesProps {
 export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Use mock data if no packages from Sanity
-  const featuredPackages =
-    packages.length > 0
-      ? packages.slice(0, 6)
-      : [
-          {
-            _id: "1",
-            title: "Dubai Adventure",
-            slug: { current: "dubai-adventure" },
-            mainImage: null,
-            imageUrl:
-              "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
-            price: 45000,
-            duration: "6 Day / 5 Nights",
-            destination: { name: "Dubai" },
-            rating: 4,
-            reviews: 15,
-          },
-          {
-            _id: "2",
-            title: "Tokyo Discovery",
-            slug: { current: "tokyo-discovery" },
-            mainImage: null,
-            imageUrl:
-              "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80",
-            price: 67000,
-            duration: "7 Day / 6 Nights",
-            destination: { name: "Tokyo" },
-            rating: 5,
-            reviews: 28,
-          },
-          {
-            _id: "3",
-            title: "Goa Beach Paradise",
-            slug: { current: "goa-beach-paradise" },
-            mainImage: null,
-            imageUrl:
-              "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
-            price: 12000,
-            duration: "4 Day / 3 Nights",
-            destination: { name: "Goa" },
-            rating: 5,
-            reviews: 42,
-          },
-          {
-            _id: "4",
-            title: "Manali Mountain Escape",
-            slug: { current: "manali-mountain-escape" },
-            mainImage: null,
-            imageUrl:
-              "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-            price: 18000,
-            duration: "5 Day / 4 Nights",
-            destination: { name: "Manali" },
-            rating: 4,
-            reviews: 35,
-          },
-          {
-            _id: "5",
-            title: "Kerala Backwaters",
-            slug: { current: "kerala-backwaters" },
-            mainImage: null,
-            imageUrl:
-              "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-            price: 15000,
-            duration: "5 Day / 4 Nights",
-            destination: { name: "Kerala" },
-            rating: 5,
-            reviews: 38,
-          },
-          {
-            _id: "6",
-            title: "Chicago City Tour",
-            slug: { current: "chicago-city-tour" },
-            mainImage: null,
-            imageUrl:
-              "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
-            price: 89000,
-            duration: "8 Day / 7 Nights",
-            destination: { name: "Chicago" },
-            rating: 4,
-            reviews: 12,
-          },
-        ];
+  // Use packages from Sanity
+  const featuredPackages = packages.slice(0, 6);
 
   const scroll = (direction: "left" | "right") => {
     const container = scrollContainerRef.current;
@@ -148,7 +66,7 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
                 e.stopPropagation();
                 scroll("left");
               }}
-              className="w-12 h-12 rounded-full bg-gray-100 hover:bg-payaana-pink hover:text-white flex items-center justify-center transition-colors shadow-md cursor-pointer z-10"
+              className="w-12 h-12 rounded-full bg-gray-100 hover:bg-brand-purple hover:text-white flex items-center justify-center transition-colors shadow-md cursor-pointer z-10"
               aria-label="Scroll left"
               type="button"
             >
@@ -170,7 +88,7 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
                 e.stopPropagation();
                 scroll("right");
               }}
-              className="w-12 h-12 rounded-full bg-gray-100 hover:bg-payaana-pink hover:text-white flex items-center justify-center transition-colors shadow-md cursor-pointer z-10"
+              className="w-12 h-12 rounded-full bg-gray-100 hover:bg-brand-purple hover:text-white flex items-center justify-center transition-colors shadow-md cursor-pointer z-10"
               aria-label="Scroll right"
               type="button"
             >
@@ -259,7 +177,7 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
                       <div className="space-y-2 mb-4 flex-grow">
                         <div className="flex items-center gap-2 text-gray-700">
                           <svg
-                            className="w-5 h-5 text-payaana-pink flex-shrink-0"
+                            className="w-5 h-5 text-brand-purple flex-shrink-0"
                             fill="none"
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -276,7 +194,7 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
                         </div>
                         <div className="flex items-center gap-2 text-gray-700">
                           <svg
-                            className="w-5 h-5 text-payaana-pink flex-shrink-0"
+                            className="w-5 h-5 text-brand-purple flex-shrink-0"
                             fill="none"
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -298,7 +216,7 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
                           <span className="text-xs text-gray-500">
                             Starting from
                           </span>
-                          <span className="text-xl font-bold text-payaana-pink">
+                          <span className="text-xl font-bold text-brand-purple">
                             ₹{(pkg.price || 0).toLocaleString()}
                           </span>
                         </div>

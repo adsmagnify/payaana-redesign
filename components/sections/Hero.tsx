@@ -46,7 +46,7 @@ export default function Hero() {
             {/* Main Headline */}
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight">
               Explore the{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-payaana-pink to-yellow-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-light-pink">
                 World
               </span>
               <br />
@@ -86,7 +86,7 @@ export default function Hero() {
                           location: e.target.value,
                         })
                       }
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-payaana-pink focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent"
                     />
                   </div>
 
@@ -104,7 +104,7 @@ export default function Hero() {
                           checkIn: e.target.value,
                         })
                       }
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-payaana-pink focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent"
                     />
                   </div>
 
@@ -122,7 +122,7 @@ export default function Hero() {
                           checkOut: e.target.value,
                         })
                       }
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-payaana-pink focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent"
                     />
                   </div>
 
@@ -141,7 +141,7 @@ export default function Hero() {
                           participants: e.target.value,
                         })
                       }
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-payaana-pink focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -172,7 +172,7 @@ export default function Hero() {
 
                   <button
                     type="submit"
-                    className="bg-payaana-pink hover:bg-payaana-pink-dark text-white px-8 py-3 rounded-lg font-semibold flex items-center space-x-2 transition-colors"
+                    className="bg-brand-purple hover:bg-brand-purple-dark text-white px-8 py-3 rounded-lg font-semibold flex items-center space-x-2 transition-colors"
                   >
                     <svg
                       className="w-5 h-5"

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "publish-drafts": "node scripts/publish-all-drafts.js",
+    "publish-destinations-fix": "node scripts/publish-destinations-fix.js"
   },
   "dependencies": {
     "@sanity/client": "^6.29.1",

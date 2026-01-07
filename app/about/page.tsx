@@ -32,7 +32,7 @@ export default function AboutPage() {
       description:
         "Personalized sightseeing itineraries tailored to your unique preferences",
       icon: "/handcrafted-experiences.webp",
-      color: "from-pink-400 to-rose-500",
+      color: "from-brand-purple to-brand-purple-dark",
     },
   ];
 
@@ -58,7 +58,7 @@ export default function AboutPage() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           >
-            <source src="/about-hero.mp4" type="video/mp4" />
+            <source src="/about-hero.webm" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
@@ -67,7 +67,7 @@ export default function AboutPage() {
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight">
             About{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-payaana-pink to-yellow-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-light-pink">
               Payaana
             </span>
           </h1>
@@ -78,7 +78,7 @@ export default function AboutPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/packages"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-payaana-pink text-white font-semibold rounded-full hover:bg-payaana-pink-dark transition-all duration-300 hover:shadow-lg hover:shadow-payaana-pink/30"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-brand-purple text-white font-semibold rounded-full hover:bg-brand-purple-dark transition-all duration-300 hover:shadow-lg hover:shadow-brand-purple/30"
             >
               Explore Packages
             </Link>
@@ -114,7 +114,7 @@ export default function AboutPage() {
               {/* Floating card */}
               <div className="absolute -bottom-8 -right-8 bg-white rounded-2xl p-6 shadow-xl z-20">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-payaana-pink to-rose-500 rounded-full flex items-center justify-center text-2xl">
+                  <div className="w-14 h-14 bg-gradient-to-br from-brand-purple to-brand-purple-dark rounded-full flex items-center justify-center text-2xl">
                     🌟
                   </div>
                   <div>
@@ -127,15 +127,15 @@ export default function AboutPage() {
 
             {/* Right - Content */}
             <div>
-              <div className="inline-block mb-4 px-4 py-1.5 bg-payaana-pink/10 rounded-full">
-                <span className="text-payaana-pink font-semibold text-sm uppercase tracking-wider">
+              <div className="inline-block mb-4 px-4 py-1.5 bg-brand-purple/10 rounded-full">
+                <span className="text-brand-purple font-semibold text-sm uppercase tracking-wider">
                   Who We Are
                 </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 Your Journey Begins
                 <br />
-                <span className="text-payaana-pink">With Our Story</span>
+                <span className="text-brand-purple">With Our Story</span>
               </h2>
               <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                 <p>
@@ -175,8 +175,8 @@ export default function AboutPage() {
       <section className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-block mb-4 px-4 py-1.5 bg-payaana-pink/10 rounded-full">
-              <span className="text-payaana-pink font-semibold text-sm uppercase tracking-wider">
+            <div className="inline-block mb-4 px-4 py-1.5 bg-brand-purple/10 rounded-full">
+              <span className="text-brand-purple font-semibold text-sm uppercase tracking-wider">
                 One-Stop Travel Solution
               </span>
             </div>
@@ -214,7 +214,7 @@ export default function AboutPage() {
                     )}
                   </div>
 
-                  <h3 className="text-2xl font-bold text-gray-900 -mt-7 mb-3 group-hover:text-payaana-pink transition-colors">
+                  <h3 className="text-2xl font-bold text-gray-900 -mt-7 mb-3 group-hover:text-brand-purple transition-colors">
                     {service.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
@@ -249,7 +249,7 @@ export default function AboutPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
               Hassle-Free Travel Experience
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-payaana-pink to-yellow-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-light-pink">
                 That Adds Value
               </span>
             </h2>
@@ -288,12 +288,12 @@ export default function AboutPage() {
             </div>
 
             <div className="mt-12 flex items-center justify-center gap-4 text-white/60">
-              <div className="w-12 h-0.5 bg-payaana-pink" />
+              <div className="w-12 h-0.5 bg-brand-purple" />
               <span className="italic">
                 &quot;The overall booking experience with Payaana is completely
                 hassle-free&quot;
               </span>
-              <div className="w-12 h-0.5 bg-payaana-pink" />
+              <div className="w-12 h-0.5 bg-brand-purple" />
             </div>
           </div>
         </div>
@@ -303,8 +303,8 @@ export default function AboutPage() {
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-block mb-4 px-4 py-1.5 bg-payaana-pink/10 rounded-full">
-              <span className="text-payaana-pink font-semibold text-sm uppercase tracking-wider">
+            <div className="inline-block mb-4 px-4 py-1.5 bg-brand-purple/10 rounded-full">
+              <span className="text-brand-purple font-semibold text-sm uppercase tracking-wider">
                 Something For Everyone
               </span>
             </div>
@@ -326,7 +326,7 @@ export default function AboutPage() {
                 <div className="text-5xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
                   {type.icon}
                 </div>
-                <h3 className="font-semibold text-gray-800 group-hover:text-payaana-pink transition-colors">
+                <h3 className="font-semibold text-gray-800 group-hover:text-brand-purple transition-colors">
                   {type.title}
                 </h3>
               </div>
@@ -336,7 +336,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="pt-24 pb-20 bg-gradient-to-br from-payaana-pink via-rose-500 to-pink-600 relative overflow-hidden">
+      <section className="pt-24 pb-20 bg-gradient-to-br from-brand-purple via-brand-purple to-brand-purple-dark relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10 text-center">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Ready to Start Your Adventure?
@@ -348,7 +348,7 @@ export default function AboutPage() {
           <div className="flex flex-wrap justify-center gap-6">
             <Link
               href="/packages"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-white text-payaana-pink font-bold text-lg rounded-full hover:bg-gray-100 transition-all duration-300 hover:shadow-2xl hover:scale-105 group"
+              className="inline-flex items-center gap-2 px-10 py-5 bg-white text-brand-purple font-bold text-lg rounded-full hover:bg-gray-100 transition-all duration-300 hover:shadow-2xl hover:scale-105 group"
             >
               Browse Packages
               <svg

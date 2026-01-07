@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getServiceBySlug, getServices } from "@/lib/sanity/queries";
-import { services as fallbackServices } from "@/lib/data/services";
 import ServiceCard from "@/components/ui/ServiceCard";
 
 export const revalidate = 60;
@@ -26,33 +25,11 @@ type Service = {
 };
 
 /* =========================
-   Helpers
-========================= */
-
-function normalizeFallbackService(service: any): Service {
-  return {
-    _id: service.slug,
-    title: service.title,
-    slug: { current: service.slug },
-    shortDescription: service.shortDescription,
-    fullDescription: service.fullDescription,
-    icon: service.icon || "✨",
-    colorGradient: service.colorGradient,
-    category: service.category,
-  };
-}
-
-/* =========================
    Static Params
 ========================= */
 
 export async function generateStaticParams() {
-  let services: Service[] = await getServices();
-
-  if (!services || services.length === 0) {
-    services = fallbackServices.map(normalizeFallbackService);
-  }
-
+  const services: Service[] = await getServices();
   return services.map((service) => ({
     slug: service.slug.current,
   }));
@@ -90,24 +67,13 @@ export default async function ServiceDetailPage({
 }: {
   params: { slug: string };
 }) {
-  let service: Service | null = await getServiceBySlug(params.slug);
-
-  if (!service) {
-    const fallback = fallbackServices.find((s) => s.slug === params.slug);
-    if (fallback) {
-      service = normalizeFallbackService(fallback);
-    }
-  }
+  const service: Service | null = await getServiceBySlug(params.slug);
 
   if (!service) {
     notFound();
   }
 
-  let allServices: Service[] = await getServices();
-  if (!allServices || allServices.length === 0) {
-    allServices = fallbackServices.map(normalizeFallbackService);
-  }
-
+  const allServices: Service[] = await getServices();
   const relatedServices = allServices
     .filter((s) => s.slug.current !== params.slug)
     .slice(0, 3);
@@ -121,7 +87,7 @@ export default async function ServiceDetailPage({
         <div className="container mx-auto px-4 text-center">
           <div className="mx-auto mb-8">
             {/* White Box Container */}
-            <div className="bg-white rounded-2xl p-3 shadow-2xl inline-block border-4 border-payaana-pink">
+            <div className="bg-white rounded-2xl p-3 shadow-2xl inline-block border-4 border-brand-purple">
               {isImageIcon ? (
                 <div className="relative w-72 h-72 mx-auto">
                   <Image
@@ -156,8 +122,8 @@ export default async function ServiceDetailPage({
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="mb-12">
-            <div className="inline-block mb-4 px-4 py-1.5 bg-payaana-pink/10 rounded-full">
-              <span className="text-payaana-pink font-semibold text-sm uppercase tracking-wider">
+            <div className="inline-block mb-4 px-4 py-1.5 bg-brand-purple/10 rounded-full">
+              <span className="text-brand-purple font-semibold text-sm uppercase tracking-wider">
                 {service.category || "Service"}
               </span>
             </div>
@@ -174,14 +140,14 @@ export default async function ServiceDetailPage({
 
           {/* Key Features/Highlights */}
           <div className="mt-16 grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-payaana-pink/5 to-rose-500/5 rounded-2xl p-8">
+            <div className="bg-gradient-to-br from-brand-purple/5 to-brand-purple/10 rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 What We Offer
               </h3>
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-start gap-3">
                   <svg
-                    className="w-6 h-6 text-payaana-pink flex-shrink-0 mt-0.5"
+                    className="w-6 h-6 text-brand-purple flex-shrink-0 mt-0.5"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -195,7 +161,7 @@ export default async function ServiceDetailPage({
                 </li>
                 <li className="flex items-start gap-3">
                   <svg
-                    className="w-6 h-6 text-payaana-pink flex-shrink-0 mt-0.5"
+                    className="w-6 h-6 text-brand-purple flex-shrink-0 mt-0.5"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -209,7 +175,7 @@ export default async function ServiceDetailPage({
                 </li>
                 <li className="flex items-start gap-3">
                   <svg
-                    className="w-6 h-6 text-payaana-pink flex-shrink-0 mt-0.5"
+                    className="w-6 h-6 text-brand-purple flex-shrink-0 mt-0.5"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -223,7 +189,7 @@ export default async function ServiceDetailPage({
                 </li>
                 <li className="flex items-start gap-3">
                   <svg
-                    className="w-6 h-6 text-payaana-pink flex-shrink-0 mt-0.5"
+                    className="w-6 h-6 text-brand-purple flex-shrink-0 mt-0.5"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -245,7 +211,7 @@ export default async function ServiceDetailPage({
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-start gap-3">
                   <svg
-                    className="w-6 h-6 text-payaana-pink flex-shrink-0 mt-0.5"
+                    className="w-6 h-6 text-brand-purple flex-shrink-0 mt-0.5"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -259,7 +225,7 @@ export default async function ServiceDetailPage({
                 </li>
                 <li className="flex items-start gap-3">
                   <svg
-                    className="w-6 h-6 text-payaana-pink flex-shrink-0 mt-0.5"
+                    className="w-6 h-6 text-brand-purple flex-shrink-0 mt-0.5"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -273,7 +239,7 @@ export default async function ServiceDetailPage({
                 </li>
                 <li className="flex items-start gap-3">
                   <svg
-                    className="w-6 h-6 text-payaana-pink flex-shrink-0 mt-0.5"
+                    className="w-6 h-6 text-brand-purple flex-shrink-0 mt-0.5"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -287,7 +253,7 @@ export default async function ServiceDetailPage({
                 </li>
                 <li className="flex items-start gap-3">
                   <svg
-                    className="w-6 h-6 text-payaana-pink flex-shrink-0 mt-0.5"
+                    className="w-6 h-6 text-brand-purple flex-shrink-0 mt-0.5"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -330,7 +296,7 @@ export default async function ServiceDetailPage({
       )}
 
       {/* CTA */}
-      <section className="py-24 bg-payaana-pink text-center text-white">
+      <section className="py-24 bg-brand-purple text-center text-white">
         <h2 className="text-4xl font-bold mb-6">Ready to Get Started?</h2>
         <p className="text-lg mb-8">
           We&apos;re here to make your journey smooth and hassle-free.
@@ -338,7 +304,7 @@ export default async function ServiceDetailPage({
         <div className="flex justify-center gap-6">
           <Link
             href="/contact"
-            className="px-10 py-4 bg-white text-payaana-pink font-bold rounded-full"
+            className="px-10 py-4 bg-white text-brand-purple font-bold rounded-full"
           >
             Contact Us
           </Link>

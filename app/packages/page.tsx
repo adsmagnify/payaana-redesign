@@ -1,242 +1,79 @@
 import PackageSearchHero from "@/components/sections/PackageSearchHero";
 import PackageCategorySection from "@/components/sections/PackageCategorySection";
 import PackageFilters from "@/components/sections/PackageFilters";
+import { getPackagesByCategoryWithDestinations } from "@/lib/sanity/queries";
+import { urlFor } from "@/lib/sanity/image";
 import { Suspense } from "react";
 
-// Dummy data - structured to match Sanity package schema
-// This will be replaced with Sanity queries later
+export const revalidate = 60; // Revalidate every 60 seconds
 
-const specialisedDestinations = [
-  {
-    _id: "spec-1",
-    image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-    name: "Maldives",
-    rating: 5,
-    reviews: 42,
-    location: "Maldives",
-    duration: "6 Days / 5 Nights",
-    slug: "maldives-paradise",
-  },
-  {
-    _id: "spec-2",
-    image:
-      "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&q=80",
-    name: "Santorini",
-    rating: 5,
-    reviews: 38,
-    location: "Greece",
-    duration: "5 Days / 4 Nights",
-    slug: "santorini-sunset",
-  },
-  {
-    _id: "spec-3",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-    name: "Bali",
-    rating: 4,
-    reviews: 56,
-    location: "Indonesia",
-    duration: "7 Days / 6 Nights",
-    slug: "bali-retreat",
-  },
-  {
-    _id: "spec-4",
-    image:
-      "https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=800&q=80",
-    name: "Iceland",
-    rating: 5,
-    reviews: 29,
-    location: "Iceland",
-    duration: "8 Days / 7 Nights",
-    slug: "iceland-northern-lights",
-  },
-];
+// Helper function to transform Sanity packages to component format
+function transformPackages(packages: any[]) {
+  return packages.map((pkg) => ({
+    _id: pkg._id,
+    image: pkg.mainImage
+      ? urlFor(pkg.mainImage).width(800).height(600).url()
+      : "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+    name: pkg.title,
+    rating: 4, // Default rating - can be added to schema later
+    reviews: 0, // Default reviews - can be added to schema later
+    location: pkg.destination?.name || pkg.destination?.location || "Multiple Locations",
+    duration: pkg.duration || "Custom Duration",
+    slug: pkg.slug?.current || "",
+  }));
+}
 
-const internationalPackages = [
-  {
-    _id: "int-1",
-    image:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80",
-    name: "France",
-    rating: 4,
-    reviews: 15,
-    location: "France",
-    duration: "6 Day / 5 Nights",
-    slug: "france-paris",
-  },
-  {
-    _id: "int-2",
-    image:
-      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800&q=80",
-    name: "Switzerland",
-    rating: 5,
-    reviews: 15,
-    location: "Switzerland",
-    duration: "6 Days / 5 Nights",
-    slug: "switzerland-alps",
-  },
-  {
-    _id: "int-3",
-    image:
-      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
-    name: "Germany",
-    rating: 4,
-    reviews: 10,
-    location: "Germany",
-    duration: "6 Days / 5 Nights",
-    slug: "germany-city-tour",
-  },
-  {
-    _id: "int-4",
-    image:
-      "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80",
-    name: "Japan",
-    rating: 5,
-    reviews: 28,
-    location: "Japan",
-    duration: "7 Days / 6 Nights",
-    slug: "japan-tokyo",
-  },
-  {
-    _id: "int-5",
-    image:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
-    name: "Dubai",
-    rating: 4,
-    reviews: 35,
-    location: "UAE",
-    duration: "5 Days / 4 Nights",
-    slug: "dubai-adventure",
-  },
-  {
-    _id: "int-6",
-    image:
-      "https://images.unsplash.com/photo-1492571350019-22de08371fd3?w=800&q=80",
-    name: "Thailand",
-    rating: 5,
-    reviews: 48,
-    location: "Thailand",
-    duration: "6 Days / 5 Nights",
-    slug: "thailand-beaches",
-  },
-];
+async function SpecialisedDestinationsWrapper() {
+  const packages = await getPackagesByCategoryWithDestinations("specialised");
+  const transformed = transformPackages(packages);
+  return (
+    <PackageCategorySection
+      title="Specialised Destination"
+      subtitle="Unique and niche destinations for extraordinary travel experiences"
+      packages={transformed}
+      bgColor="white"
+    />
+  );
+}
 
-const domesticPackages = [
-  {
-    _id: "dom-1",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
-    name: "Kerala",
-    rating: 5,
-    reviews: 38,
-    location: "Kerala",
-    duration: "5 Day / 4 Nights",
-    slug: "kerala-backwaters",
-  },
-  {
-    _id: "dom-2",
-    image:
-      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
-    name: "Goa",
-    rating: 5,
-    reviews: 42,
-    location: "Goa",
-    duration: "4 Day / 3 Nights",
-    slug: "goa-beach-paradise",
-  },
-  {
-    _id: "dom-3",
-    image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-    name: "Manali",
-    rating: 4,
-    reviews: 35,
-    location: "Himachal Pradesh",
-    duration: "5 Day / 4 Nights",
-    slug: "manali-mountain-escape",
-  },
-  {
-    _id: "dom-4",
-    image:
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
-    name: "Rajasthan",
-    rating: 4,
-    reviews: 32,
-    location: "Rajasthan",
-    duration: "7 Days / 6 Nights",
-    slug: "rajasthan-heritage",
-  },
-  {
-    _id: "dom-5",
-    image:
-      "https://images.unsplash.com/photo-1588416381073-3c0b5b0b5b0b?w=800&q=80",
-    name: "Darjeeling",
-    rating: 4,
-    reviews: 27,
-    location: "West Bengal",
-    duration: "4 Days / 3 Nights",
-    slug: "darjeeling-tea-gardens",
-  },
-  {
-    _id: "dom-6",
-    image:
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
-    name: "Shimla",
-    rating: 4,
-    reviews: 29,
-    location: "Himachal Pradesh",
-    duration: "5 Days / 4 Nights",
-    slug: "shimla-hill-station",
-  },
-];
+async function InternationalPackagesWrapper() {
+  const packages = await getPackagesByCategoryWithDestinations("international");
+  const transformed = transformPackages(packages);
+  return (
+    <PackageCategorySection
+      title="International Holiday Packages"
+      subtitle="Explore the world with our curated international travel packages"
+      packages={transformed}
+      bgColor="gray"
+    />
+  );
+}
 
-const fixedDepartures = [
-  {
-    _id: "fix-1",
-    image:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80",
-    name: "Europe Tour",
-    rating: 5,
-    reviews: 18,
-    location: "Multiple Cities",
-    duration: "10 Days / 9 Nights",
-    slug: "europe-tour-2024",
-  },
-  {
-    _id: "fix-2",
-    image:
-      "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800&q=80",
-    name: "Swiss Alps",
-    rating: 5,
-    reviews: 12,
-    location: "Switzerland",
-    duration: "7 Days / 6 Nights",
-    slug: "swiss-alps-departure",
-  },
-  {
-    _id: "fix-3",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-    name: "South India",
-    rating: 4,
-    reviews: 25,
-    location: "Kerala & Tamil Nadu",
-    duration: "8 Days / 7 Nights",
-    slug: "south-india-tour",
-  },
-  {
-    _id: "fix-4",
-    image:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
-    name: "Dubai Special",
-    rating: 4,
-    reviews: 20,
-    location: "Dubai",
-    duration: "5 Days / 4 Nights",
-    slug: "dubai-special-departure",
-  },
-];
+async function DomesticPackagesWrapper() {
+  const packages = await getPackagesByCategoryWithDestinations("domestic");
+  const transformed = transformPackages(packages);
+  return (
+    <PackageCategorySection
+      title="Domestic Holiday Packages"
+      subtitle="Discover the beauty of India with our domestic travel packages"
+      packages={transformed}
+      bgColor="white"
+    />
+  );
+}
+
+async function FixedDeparturesWrapper() {
+  const packages = await getPackagesByCategoryWithDestinations("fixedDeparture");
+  const transformed = transformPackages(packages);
+  return (
+    <PackageCategorySection
+      title="Fixed Departures"
+      subtitle="Join our scheduled group tours with fixed departure dates"
+      packages={transformed}
+      bgColor="gray"
+    />
+  );
+}
 
 export default function PackagesPage() {
   return (
@@ -270,36 +107,108 @@ export default function PackagesPage() {
       </section>
 
       {/* Specialised Destination Section */}
-      <PackageCategorySection
-        title="Specialised Destination"
-        subtitle="Unique and niche destinations for extraordinary travel experiences"
-        packages={specialisedDestinations}
-        bgColor="white"
-      />
+      <Suspense
+        fallback={
+          <section className="py-20 bg-white">
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {[...Array(4)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="bg-white rounded-2xl overflow-hidden shadow-lg"
+                  >
+                    <div className="h-64 bg-gray-200 animate-pulse" />
+                    <div className="p-6">
+                      <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
+                      <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        }
+      >
+        <SpecialisedDestinationsWrapper />
+      </Suspense>
 
       {/* International Holiday Packages Section */}
-      <PackageCategorySection
-        title="International Holiday Packages"
-        subtitle="Explore the world with our curated international travel packages"
-        packages={internationalPackages}
-        bgColor="gray"
-      />
+      <Suspense
+        fallback={
+          <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {[...Array(4)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="bg-white rounded-2xl overflow-hidden shadow-lg"
+                  >
+                    <div className="h-64 bg-gray-200 animate-pulse" />
+                    <div className="p-6">
+                      <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
+                      <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        }
+      >
+        <InternationalPackagesWrapper />
+      </Suspense>
 
       {/* Domestic Holiday Packages Section */}
-      <PackageCategorySection
-        title="Domestic Holiday Packages"
-        subtitle="Discover the beauty of India with our domestic travel packages"
-        packages={domesticPackages}
-        bgColor="white"
-      />
+      <Suspense
+        fallback={
+          <section className="py-20 bg-white">
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {[...Array(4)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="bg-white rounded-2xl overflow-hidden shadow-lg"
+                  >
+                    <div className="h-64 bg-gray-200 animate-pulse" />
+                    <div className="p-6">
+                      <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
+                      <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        }
+      >
+        <DomesticPackagesWrapper />
+      </Suspense>
 
       {/* Fixed Departures Section */}
-      <PackageCategorySection
-        title="Fixed Departures"
-        subtitle="Join our scheduled group tours with fixed departure dates"
-        packages={fixedDepartures}
-        bgColor="gray"
-      />
+      <Suspense
+        fallback={
+          <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {[...Array(4)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="bg-white rounded-2xl overflow-hidden shadow-lg"
+                  >
+                    <div className="h-64 bg-gray-200 animate-pulse" />
+                    <div className="p-6">
+                      <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
+                      <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        }
+      >
+        <FixedDeparturesWrapper />
+      </Suspense>
     </main>
   );
 }

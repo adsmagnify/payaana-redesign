@@ -1,40 +1,39 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#fdf2f8',
-          100: '#fce7f3',
-          200: '#fbcfe8',
-          300: '#f9a8d4',
-          400: '#f472b6',
-          500: '#ec4899',
-          600: '#db2777',
-          700: '#be185d',
-          800: '#9f1239',
-          900: '#831843',
+        primary: "#FAF7F7",
+        secondary: {
+          green: "#1D5306",
+          purple: "#962767",
         },
         payaana: {
-          pink: '#FF69B4',
-          'pink-light': '#FFB6D9',
-          'pink-dark': '#E91E63',
-          gold: '#FFD700',
-          purple: '#9C27B0',
+          pink: "#962767", // Using secondary purple instead of pink
+          gold: "#FFD700",
+          purple: "#962767",
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        sans: [
+          "var(--font-dm-sans)",
+          "DM Sans",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "sans-serif",
+        ],
       },
     },
   },
   plugins: [],
-}
-export default config
-
+};
+export default config;
