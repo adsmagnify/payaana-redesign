@@ -145,7 +145,7 @@ export default async function ServiceDetailPage({
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="mb-12">
-            <div className="inline-block mb-4 px-4 py-1.5 bg-brand-purple/10 rounded-full">
+            <div className="inline-block mb-4 px-5 py-2 bg-brand-purple/10 border-2 border-brand-purple/30 rounded-full shadow-md">
               <span className="text-brand-purple font-semibold text-sm uppercase tracking-wider">
                 {service.category || "Service"}
               </span>
@@ -163,7 +163,7 @@ export default async function ServiceDetailPage({
 
           {/* Key Features/Highlights */}
           <div className="mt-16 grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-brand-purple/5 to-brand-purple/10 rounded-2xl p-8">
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 What We Offer
               </h3>

@@ -54,8 +54,9 @@ export default function Hero() {
 
             {/* Sub-headline */}
             <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed mb-12">
-              Your trusted partner for personalized and hassle-free travel
-              experiences, tailored to meet your unique preferences and needs.
+              Your trusted partner since 2012 for personalized and hassle-free
+              travel experiences, tailored to meet your unique preferences and
+              needs.
             </p>
           </div>
         </div>

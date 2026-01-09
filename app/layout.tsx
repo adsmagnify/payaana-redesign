@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import SchoolTripsBanner from "@/components/ui/SchoolTripsBanner";
 
 const dmSans = DM_Sans({ 
   subsets: ["latin"], 
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={dmSans.variable}>
       <body className="font-sans">
+        <SchoolTripsBanner />
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />

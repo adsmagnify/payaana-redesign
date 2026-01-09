@@ -249,26 +249,17 @@ export default async function Footer() {
               <p className="text-gray-400 text-sm">
                 &copy; {new Date().getFullYear()} Payaana. All rights reserved.
               </p>
-              <div className="flex items-center gap-6">
-                <Link
-                  href="/about"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
+              <p className="text-gray-400 text-sm">
+                Designed by{" "}
+                <a
+                  href="https://adsmagnify.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-payaana-pink transition-colors underline"
                 >
-                  About Us
-                </Link>
-                <Link
-                  href="/contact"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
-                >
-                  Contact
-                </Link>
-                <Link
-                  href="/gallery"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
-                >
-                  Gallery
-                </Link>
-              </div>
+                  adsmagnify.com
+                </a>
+              </p>
             </div>
           </div>
         </div>

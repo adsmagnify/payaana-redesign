@@ -61,20 +61,36 @@ export default function PackageInquiryForm({
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
-    // In production, this would send to an API endpoint with packageId
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setSubmitStatus("success");
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        travelers: "",
-        travelDate: "",
-        message: "",
+      const response = await fetch("/api/package-inquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          packageName,
+          packageId,
+        }),
       });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitStatus("success");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          travelers: "",
+          travelDate: "",
+          message: "",
+        });
+      } else {
+        setSubmitStatus("error");
+      }
     } catch (error) {
+      console.error("Error submitting inquiry:", error);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);

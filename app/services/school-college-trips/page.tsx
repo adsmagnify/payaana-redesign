@@ -18,6 +18,7 @@ interface Package {
   title: string;
   slug: { current: string };
   mainImage?: any;
+  imageUrl?: string; // For dummy data
   price?: number;
   duration?: string;
   description?: string;
@@ -46,7 +47,8 @@ function TripSection({ title, packages }: TripSectionProps) {
         {packages.map((pkg) => {
           const imageUrl = pkg.mainImage
             ? urlFor(pkg.mainImage).width(600).height(400).url()
-            : "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80";
+            : (pkg as any).imageUrl ||
+              "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80";
 
           return (
             <Link
@@ -184,6 +186,8 @@ export default async function SchoolCollegeTripsPage() {
               price: 15000,
               duration: "3 Days / 2 Nights",
               destination: { name: "Delhi, Agra" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80",
             },
             {
               _id: "dummy-2",
@@ -192,6 +196,48 @@ export default async function SchoolCollegeTripsPage() {
               price: 8000,
               duration: "2 Days / 1 Night",
               destination: { name: "Bangalore" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80",
+            },
+            {
+              _id: "dummy-11",
+              title: "Cultural Heritage Tour",
+              slug: { current: "cultural-heritage" },
+              price: 12000,
+              duration: "3 Days / 2 Nights",
+              destination: { name: "Mysore" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
+            },
+            {
+              _id: "dummy-12",
+              title: "Wildlife Safari Study Tour",
+              slug: { current: "wildlife-safari" },
+              price: 18000,
+              duration: "4 Days / 3 Nights",
+              destination: { name: "Bandipur" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+            },
+            {
+              _id: "dummy-13",
+              title: "Space Center Visit",
+              slug: { current: "space-center" },
+              price: 6000,
+              duration: "1 Day",
+              destination: { name: "Bangalore" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=800&q=80",
+            },
+            {
+              _id: "dummy-14",
+              title: "Coastal Study Tour",
+              slug: { current: "coastal-tour" },
+              price: 14000,
+              duration: "3 Days / 2 Nights",
+              destination: { name: "Goa" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
             },
           ]
         : schoolStudyTours,
@@ -205,6 +251,8 @@ export default async function SchoolCollegeTripsPage() {
               price: 12000,
               duration: "4 Days / 3 Nights",
               destination: { name: "Ooty" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
             },
             {
               _id: "dummy-4",
@@ -213,6 +261,48 @@ export default async function SchoolCollegeTripsPage() {
               price: 10000,
               duration: "3 Days / 2 Nights",
               destination: { name: "Coorg" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
+            },
+            {
+              _id: "dummy-15",
+              title: "Trekking Camp - Manali",
+              slug: { current: "manali-trek" },
+              price: 16000,
+              duration: "5 Days / 4 Nights",
+              destination: { name: "Manali" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
+            },
+            {
+              _id: "dummy-16",
+              title: "River Rafting Camp",
+              slug: { current: "rafting-camp" },
+              price: 11000,
+              duration: "3 Days / 2 Nights",
+              destination: { name: "Rishikesh" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80",
+            },
+            {
+              _id: "dummy-17",
+              title: "Beach Adventure Camp",
+              slug: { current: "beach-camp" },
+              price: 13000,
+              duration: "4 Days / 3 Nights",
+              destination: { name: "Pondicherry" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+            },
+            {
+              _id: "dummy-18",
+              title: "Mountain Climbing Camp",
+              slug: { current: "climbing-camp" },
+              price: 20000,
+              duration: "6 Days / 5 Nights",
+              destination: { name: "Himachal" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
             },
           ]
         : schoolOutboundCamps,
@@ -226,6 +316,8 @@ export default async function SchoolCollegeTripsPage() {
               price: 20000,
               duration: "5 Days / 4 Nights",
               destination: { name: "Bangalore, Hyderabad" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80",
             },
             {
               _id: "dummy-6",
@@ -234,6 +326,48 @@ export default async function SchoolCollegeTripsPage() {
               price: 18000,
               duration: "4 Days / 3 Nights",
               destination: { name: "Rajasthan" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80",
+            },
+            {
+              _id: "dummy-19",
+              title: "Finance & Banking Tour",
+              slug: { current: "finance-tour" },
+              price: 22000,
+              duration: "5 Days / 4 Nights",
+              destination: { name: "Mumbai" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+            },
+            {
+              _id: "dummy-20",
+              title: "Media & Communication Tour",
+              slug: { current: "media-tour" },
+              price: 19000,
+              duration: "4 Days / 3 Nights",
+              destination: { name: "Delhi" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80",
+            },
+            {
+              _id: "dummy-21",
+              title: "Architecture Study Tour",
+              slug: { current: "architecture-tour" },
+              price: 17000,
+              duration: "4 Days / 3 Nights",
+              destination: { name: "Ahmedabad" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=800&q=80",
+            },
+            {
+              _id: "dummy-22",
+              title: "Agricultural Study Tour",
+              slug: { current: "agriculture-tour" },
+              price: 15000,
+              duration: "3 Days / 2 Nights",
+              destination: { name: "Punjab" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&q=80",
             },
           ]
         : collegeStudyTours,
@@ -247,6 +381,8 @@ export default async function SchoolCollegeTripsPage() {
               price: 5000,
               duration: "1 Day",
               destination: { name: "Bangalore" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80",
             },
             {
               _id: "dummy-8",
@@ -255,6 +391,48 @@ export default async function SchoolCollegeTripsPage() {
               price: 6000,
               duration: "1 Day",
               destination: { name: "Mumbai" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
+            },
+            {
+              _id: "dummy-23",
+              title: "Automobile Industry Visit",
+              slug: { current: "automobile-visit" },
+              price: 5500,
+              duration: "1 Day",
+              destination: { name: "Chennai" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80",
+            },
+            {
+              _id: "dummy-24",
+              title: "Pharmaceutical Companies Visit",
+              slug: { current: "pharma-visit" },
+              price: 5000,
+              duration: "1 Day",
+              destination: { name: "Hyderabad" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80",
+            },
+            {
+              _id: "dummy-25",
+              title: "Textile Industry Visit",
+              slug: { current: "textile-visit" },
+              price: 4500,
+              duration: "1 Day",
+              destination: { name: "Tirupur" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
+            },
+            {
+              _id: "dummy-26",
+              title: "Research Labs Visit",
+              slug: { current: "research-visit" },
+              price: 6000,
+              duration: "1 Day",
+              destination: { name: "Bangalore" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80",
             },
           ]
         : collegeIndustrialVisits,
@@ -268,6 +446,8 @@ export default async function SchoolCollegeTripsPage() {
               price: 15000,
               duration: "5 Days / 4 Nights",
               destination: { name: "Manali" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
             },
             {
               _id: "dummy-10",
@@ -276,6 +456,48 @@ export default async function SchoolCollegeTripsPage() {
               price: 14000,
               duration: "4 Days / 3 Nights",
               destination: { name: "Goa" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+            },
+            {
+              _id: "dummy-27",
+              title: "Corporate Training Camp",
+              slug: { current: "corporate-camp" },
+              price: 18000,
+              duration: "5 Days / 4 Nights",
+              destination: { name: "Lonavala" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
+            },
+            {
+              _id: "dummy-28",
+              title: "Adventure Leadership Camp",
+              slug: { current: "adventure-leadership" },
+              price: 16000,
+              duration: "4 Days / 3 Nights",
+              destination: { name: "Rishikesh" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80",
+            },
+            {
+              _id: "dummy-29",
+              title: "Communication Skills Camp",
+              slug: { current: "communication-camp" },
+              price: 12000,
+              duration: "3 Days / 2 Nights",
+              destination: { name: "Ooty" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+            },
+            {
+              _id: "dummy-30",
+              title: "Entrepreneurship Bootcamp",
+              slug: { current: "entrepreneurship-camp" },
+              price: 20000,
+              duration: "6 Days / 5 Nights",
+              destination: { name: "Bangalore" },
+              imageUrl:
+                "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
             },
           ]
         : collegeOutboundCamps,
@@ -319,11 +541,6 @@ export default async function SchoolCollegeTripsPage() {
           {/* School Programmes Section */}
           <div className="mb-20">
             <div className="text-center mb-12">
-              <div className="inline-block mb-4 px-4 py-1.5 bg-brand-purple/10 rounded-full">
-                <span className="text-brand-purple font-semibold text-sm uppercase tracking-wider">
-                  School Programmes
-                </span>
-              </div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 School Programmes
               </h2>
@@ -349,11 +566,6 @@ export default async function SchoolCollegeTripsPage() {
           {/* College Outbounds Section */}
           <div>
             <div className="text-center mb-12">
-              <div className="inline-block mb-4 px-4 py-1.5 bg-brand-purple/10 rounded-full">
-                <span className="text-brand-purple font-semibold text-sm uppercase tracking-wider">
-                  College Outbounds
-                </span>
-              </div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 College Outbounds
               </h2>
