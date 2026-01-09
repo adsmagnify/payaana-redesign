@@ -121,7 +121,7 @@ export default async function PackageDetailPage({
         )}
         <div className="container mx-auto px-4 text-center relative z-10">
           {packageData.destination && (
-            <div className="inline-block mb-6 px-4 py-1.5 bg-brand-purple/20 rounded-full border border-brand-purple/30">
+            <div className="inline-block mb-6 px-5 py-2 bg-brand-purple/10 border-2 border-brand-purple/30 rounded-full shadow-md">
               <Link
                 href={
                   packageData.destination.slug
@@ -254,7 +254,7 @@ export default async function PackageDetailPage({
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="inline-block mb-6 px-4 py-1.5 bg-brand-purple/10 rounded-full">
+              <div className="inline-block mb-6 px-5 py-2 bg-brand-purple/10 border-2 border-brand-purple/30 rounded-full shadow-md">
                 <span className="text-brand-purple font-semibold text-sm uppercase tracking-wider">
                   About This Package
                 </span>

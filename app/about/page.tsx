@@ -207,7 +207,12 @@ export default function AboutPage() {
                   {/* Icon */}
                   <div className="mx-auto mb-1 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     {service.icon.startsWith("/") ? (
-                      <div className="relative w-40 h-40 mx-auto">
+                      <div
+                        className={`relative mx-auto ${service.title.includes("School")
+                          ? "w-44 h-44 mb-0"
+                          : "w-44 h-44"
+                          }`}
+                      >
                         <Image
                           src={service.icon}
                           alt={service.title}
@@ -247,7 +252,7 @@ export default function AboutPage() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-block mb-4 px-4 py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+            <div className="inline-block mb-4 px-5 py-2 bg-white/10 backdrop-blur-sm rounded-full border-2 border-white/30 shadow-md">
               <span className="text-white font-semibold text-sm uppercase tracking-wider">
                 Why Choose Payaana
               </span>

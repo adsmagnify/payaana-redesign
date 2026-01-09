@@ -39,7 +39,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center absolute right-0">
             <Link href="/packages">
               <button className="bg-white hover:bg-gray-100 text-brand-purple px-6 py-3 rounded-full font-semibold transition-colors shadow-lg">
-                Get Started
+                Book Now
               </button>
             </Link>
           </div>

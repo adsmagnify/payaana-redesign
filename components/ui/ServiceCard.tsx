@@ -58,7 +58,12 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         {/* Icon */}
         <div className="mx-auto transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
           {isSanityImage && imageUrl ? (
-            <div className="relative w-48 h-48 mx-auto">
+            <div
+              className={`relative mx-auto ${service.title.includes("School")
+                  ? "w-64 h-64 -mb-8"
+                  : "w-48 h-48"
+                }`}
+            >
               <SafeImage
                 src={imageUrl}
                 alt={service.title}
@@ -69,7 +74,12 @@ export default function ServiceCard({ service }: ServiceCardProps) {
               />
             </div>
           ) : isStringPath ? (
-            <div className="relative w-48 h-48 mx-auto">
+            <div
+              className={`relative mx-auto ${service.title.includes("School")
+                  ? "w-64 h-64 -mb-8"
+                  : "w-48 h-48"
+                }`}
+            >
               <SafeImage
                 src={service.icon}
                 alt={service.title}

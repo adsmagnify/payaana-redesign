@@ -8,30 +8,35 @@ export default function WhyPayaana() {
       title: "Personalized Packages",
       description: "Tailored travel experiences designed just for you",
       link: "/packages",
+      color: "from-brand-purple to-brand-purple-dark",
     },
     {
       image: "/services-doorstep.webp",
       title: "Services at Your Doorstep",
       description: "Easy booking and reliable support, anytime, anywhere",
       link: "/services",
+      color: "from-blue-400 to-indigo-500",
     },
     {
       image: "/pocketfriendly-prices.webp",
       title: "Pocket-Friendly Prices",
       description: "Affordable travel packages without compromising quality",
       link: "/packages",
+      color: "from-orange-400 to-red-500",
     },
     {
       image: "/superfast-services.webp",
       title: "Super Fast Service",
       description: "Quick bookings and instant confirmations",
       link: "/services",
+      color: "from-green-400 to-teal-500",
     },
     {
       image: "/school-college-trips.webp",
       title: "School/College Trips and Camps",
       description: "Educational and adventure trips for schools and colleges",
       link: "/services/school-college-trips",
+      color: "from-purple-400 to-pink-500",
     },
   ];
 
@@ -49,26 +54,33 @@ export default function WhyPayaana() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className="group relative flex"
-            >
-              <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 w-full flex flex-col">
+            <div key={index} className="group relative">
+              <div className="relative bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden h-full text-center">
+                {/* Gradient background on hover */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+                />
+
                 {/* Icon/Image Container */}
-                <div className="relative w-48 h-44 mx-auto mb-4 flex items-center justify-center flex-shrink-0 bg-transparent">
+                <div className="mx-auto mb-1 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                   {feature.image ? (
-                    <div className="relative w-full h-full bg-transparent">
+                    <div
+                      className={`relative mx-auto ${feature.title.includes("School")
+                        ? "w-44 h-44 mb-0"
+                        : "w-44 h-44"
+                        }`}
+                    >
                       <Image
                         src={feature.image}
                         alt={feature.title}
                         fill
-                        className="object-contain drop-shadow-lg"
+                        className="object-contain"
                       />
                     </div>
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <div className="w-40 h-40 mx-auto bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
                       <svg
                         className="w-16 h-16 text-white"
                         fill="none"
@@ -86,18 +98,12 @@ export default function WhyPayaana() {
                   )}
                 </div>
 
-                {/* Content */}
-                <div className="text-center flex-grow flex flex-col justify-center">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-purple transition-colors">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {feature.description}
-                  </p>
-                </div>
-
-                {/* Decorative element */}
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-brand-purple group-hover:w-16 transition-all duration-300 rounded-full"></div>
+                <h3 className="text-2xl font-bold text-gray-900 -mt-7 mb-3 group-hover:text-brand-purple transition-colors">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
             </div>
           ))}

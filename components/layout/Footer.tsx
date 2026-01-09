@@ -47,9 +47,9 @@ export default async function Footer() {
       <div className="relative z-10">
         <div className="container mx-auto px-4 py-20">
           {/* Main Footer Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-20 mb-16">
             {/* Logo & About Section */}
-            <div className="lg:col-span-3">
+            <div>
               <Link href="/" className="inline-block mb-6">
                 <div className="relative w-44 h-14">
                   <Image
@@ -126,7 +126,7 @@ export default async function Footer() {
             </div>
 
             {/* Services Section */}
-            <div className="lg:col-span-3">
+            <div>
               <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
                 <span className="w-1 h-6 bg-gradient-to-b from-brand-purple to-light-pink rounded-full"></span>
                 Services
@@ -167,79 +167,72 @@ export default async function Footer() {
               </ul>
             </div>
 
-            {/* Packages Section */}
-            <div className="lg:col-span-6">
+            {/* International Packages */}
+            <div>
               <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
                 <span className="w-1 h-6 bg-gradient-to-b from-brand-purple to-light-pink rounded-full"></span>
-                Popular Packages
+                International Packages
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* International Packages */}
-                <div>
-                  <h4 className="text-brand-purple font-semibold text-sm mb-3 uppercase tracking-wider">
-                    International
-                  </h4>
-                  <ul className="space-y-2">
-                    {featuredInternational.length > 0 ? (
-                      featuredInternational.map((pkg: Package) => (
-                        <li key={pkg._id}>
-                          <Link
-                            href={`/packages/${pkg.slug.current}`}
-                            className="text-gray-300 hover:text-white text-sm transition-colors line-clamp-1"
-                          >
-                            {pkg.title}
-                          </Link>
-                        </li>
-                      ))
-                    ) : (
-                      <li className="text-gray-400 text-sm">No packages</li>
-                    )}
-                    {internationalPackages.length > 6 && (
-                      <li>
-                        <Link
-                          href="/packages?category=international"
-                          className="text-brand-purple hover:text-light-pink text-sm font-medium transition-colors"
-                        >
-                          View All →
-                        </Link>
-                      </li>
-                    )}
-                  </ul>
-                </div>
+              <ul className="space-y-2">
+                {featuredInternational.length > 0 ? (
+                  featuredInternational.map((pkg: Package) => (
+                    <li key={pkg._id}>
+                      <Link
+                        href={`/packages/${pkg.slug.current}`}
+                        className="text-gray-300 hover:text-white text-sm transition-colors line-clamp-1"
+                      >
+                        {pkg.title}
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <li className="text-gray-400 text-sm">No packages</li>
+                )}
+                {internationalPackages.length > 6 && (
+                  <li>
+                    <Link
+                      href="/packages?category=international"
+                      className="text-brand-purple hover:text-light-pink text-sm font-medium transition-colors"
+                    >
+                      View All →
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            </div>
 
-                {/* Domestic Packages */}
-                <div>
-                  <h4 className="text-brand-purple font-semibold text-sm mb-3 uppercase tracking-wider">
-                    Domestic
-                  </h4>
-                  <ul className="space-y-2">
-                    {featuredDomestic.length > 0 ? (
-                      featuredDomestic.map((pkg: Package) => (
-                        <li key={pkg._id}>
-                          <Link
-                            href={`/packages/${pkg.slug.current}`}
-                            className="text-gray-300 hover:text-white text-sm transition-colors line-clamp-1"
-                          >
-                            {pkg.title}
-                          </Link>
-                        </li>
-                      ))
-                    ) : (
-                      <li className="text-gray-400 text-sm">No packages</li>
-                    )}
-                    {domesticPackages.length > 6 && (
-                      <li>
-                        <Link
-                          href="/packages?category=domestic"
-                          className="text-brand-purple hover:text-light-pink text-sm font-medium transition-colors"
-                        >
-                          View All →
-                        </Link>
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              </div>
+            {/* Domestic Packages */}
+            <div>
+              <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
+                <span className="w-1 h-6 bg-gradient-to-b from-brand-purple to-light-pink rounded-full"></span>
+                Domestic Packages
+              </h3>
+              <ul className="space-y-2">
+                {featuredDomestic.length > 0 ? (
+                  featuredDomestic.map((pkg: Package) => (
+                    <li key={pkg._id}>
+                      <Link
+                        href={`/packages/${pkg.slug.current}`}
+                        className="text-gray-300 hover:text-white text-sm transition-colors line-clamp-1"
+                      >
+                        {pkg.title}
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <li className="text-gray-400 text-sm">No packages</li>
+                )}
+                {domesticPackages.length > 6 && (
+                  <li>
+                    <Link
+                      href="/packages?category=domestic"
+                      className="text-brand-purple hover:text-light-pink text-sm font-medium transition-colors"
+                    >
+                      View All →
+                    </Link>
+                  </li>
+                )}
+              </ul>
             </div>
           </div>
 
