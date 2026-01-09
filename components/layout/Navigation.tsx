@@ -133,7 +133,7 @@ export default function Navigation({ mobile = false }: NavigationProps) {
                 </svg>
               </button>
             </div>
-            {isServicesOpen && services.length > 0 && (
+            {isServicesOpen && (
               <ul className="pl-4 mt-2 space-y-1">
                 {services.map((service) => (
                   <li key={service._id}>
@@ -146,6 +146,15 @@ export default function Navigation({ mobile = false }: NavigationProps) {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <Link
+                    href="/services/school-college-trips"
+                    className="text-gray-600 hover:text-brand-purple transition-colors text-sm py-1 block"
+                    onClick={() => setIsServicesOpen(false)}
+                  >
+                    School/College Trips and Camps
+                  </Link>
+                </li>
               </ul>
             )}
           </div>
@@ -185,7 +194,7 @@ export default function Navigation({ mobile = false }: NavigationProps) {
                 </svg>
               </button>
             </div>
-            {isServicesOpen && services.length > 0 && (
+            {isServicesOpen && (
               <div
                 className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
                 onMouseEnter={() => setIsServicesOpen(true)}
@@ -202,6 +211,13 @@ export default function Navigation({ mobile = false }: NavigationProps) {
                       {service.title}
                     </Link>
                   ))}
+                  <Link
+                    href="/services/school-college-trips"
+                    className="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-brand-purple transition-colors text-sm"
+                    onClick={() => setIsServicesOpen(false)}
+                  >
+                    School/College Trips and Camps
+                  </Link>
                 </div>
               </div>
             )}

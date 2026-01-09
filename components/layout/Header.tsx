@@ -18,7 +18,7 @@ export default function Header() {
             <div className="bg-white rounded-full px-3 py-2 shadow-lg">
               <div className="relative w-32 h-10">
                 <Image
-                  src="/payaana-logo.png"
+                  src="/payaana-logo.webp"
                   alt="Payaana Logo"
                   fill
                   className="object-contain"

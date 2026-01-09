@@ -91,11 +91,11 @@ export default function PackageInquiryForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 bg-gray-50 p-6 rounded-lg"
+      className="space-y-6"
     >
-      <div className="mb-4">
-        <p className="text-sm text-gray-600 mb-2">Inquiring about:</p>
-        <p className="font-semibold text-gray-900">{packageName}</p>
+      <div className="mb-6 pb-6 border-b border-gray-200">
+        <p className="text-sm text-gray-600 mb-2 font-medium">Inquiring about:</p>
+        <p className="text-lg font-bold text-brand-purple">{packageName}</p>
       </div>
 
       <Input

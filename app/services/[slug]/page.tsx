@@ -1,9 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getServiceBySlug, getServices } from "@/lib/sanity/queries";
 import ServiceCard from "@/components/ui/ServiceCard";
+import SafeImage from "@/components/ui/SafeImage";
+import { urlFor } from "@/lib/sanity/image";
 
 export const revalidate = 60;
 
@@ -19,7 +20,8 @@ type Service = {
   };
   shortDescription: string;
   fullDescription?: string;
-  icon: string;
+  icon?: any; // Can be Sanity image object, string path, or undefined
+  iconEmoji?: string;
   colorGradient?: string;
   category?: string;
 };
@@ -78,7 +80,15 @@ export default async function ServiceDetailPage({
     .filter((s) => s.slug.current !== params.slug)
     .slice(0, 3);
 
-  const isImageIcon = service.icon?.startsWith("/");
+  // Check if icon is a Sanity image object
+  const isSanityImage = service.icon && typeof service.icon === "object" && service.icon.asset;
+  // Check if icon is a string path
+  const isStringPath = typeof service.icon === "string" && service.icon.startsWith("/");
+  // Get emoji fallback
+  const emojiIcon = service.iconEmoji || (typeof service.icon === "string" && !service.icon.startsWith("/") ? service.icon : null) || "✨";
+  
+  // Get image URL if it's a Sanity image
+  const imageUrl = isSanityImage ? urlFor(service.icon).width(600).height(600).url() : null;
 
   return (
     <main className="overflow-hidden">
@@ -88,13 +98,26 @@ export default async function ServiceDetailPage({
           <div className="mx-auto mb-8">
             {/* White Box Container */}
             <div className="bg-white rounded-2xl p-3 shadow-2xl inline-block border-4 border-brand-purple">
-              {isImageIcon ? (
+              {isSanityImage && imageUrl ? (
                 <div className="relative w-72 h-72 mx-auto">
-                  <Image
+                  <SafeImage
+                    src={imageUrl}
+                    alt={service.title}
+                    fill
+                    className="object-contain"
+                    fallbackIcon={emojiIcon}
+                    fallbackGradient={service.colorGradient || "from-blue-400 to-indigo-500"}
+                  />
+                </div>
+              ) : isStringPath ? (
+                <div className="relative w-72 h-72 mx-auto">
+                  <SafeImage
                     src={service.icon}
                     alt={service.title}
                     fill
                     className="object-contain"
+                    fallbackIcon={emojiIcon}
+                    fallbackGradient={service.colorGradient || "from-blue-400 to-indigo-500"}
                   />
                 </div>
               ) : (
@@ -103,7 +126,7 @@ export default async function ServiceDetailPage({
                     service.colorGradient || "from-blue-400 to-indigo-500"
                   } rounded-3xl flex items-center justify-center text-8xl shadow-lg`}
                 >
-                  {service.icon || "✨"}
+                  {emojiIcon}
                 </div>
               )}
             </div>
@@ -295,27 +318,6 @@ export default async function ServiceDetailPage({
         </section>
       )}
 
-      {/* CTA */}
-      <section className="py-24 bg-brand-purple text-center text-white">
-        <h2 className="text-4xl font-bold mb-6">Ready to Get Started?</h2>
-        <p className="text-lg mb-8">
-          We&apos;re here to make your journey smooth and hassle-free.
-        </p>
-        <div className="flex justify-center gap-6">
-          <Link
-            href="/contact"
-            className="px-10 py-4 bg-white text-brand-purple font-bold rounded-full"
-          >
-            Contact Us
-          </Link>
-          <Link
-            href="/packages"
-            className="px-10 py-4 border-2 border-white rounded-full"
-          >
-            Browse Packages
-          </Link>
-        </div>
-      </section>
     </main>
   );
 }

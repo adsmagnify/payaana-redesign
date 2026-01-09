@@ -13,7 +13,22 @@ export const revalidate = 60; // Revalidate every 60 seconds
 
 export default async function ServicesPage() {
   // Fetch services from Sanity
-  const services = await getServices();
+  const sanityServices = await getServices();
+
+  // Add School/College Trips as a dummy service (not in Sanity)
+  const schoolCollegeTripsService = {
+    _id: "school-college-trips",
+    title: "School/College Trips and Camps",
+    slug: { current: "school-college-trips" },
+    shortDescription:
+      "Educational and adventure trips for schools and colleges",
+    icon: "/school-college-trips.webp",
+    iconEmoji: "🎓",
+    colorGradient: "from-purple-400 to-pink-500",
+  };
+
+  const services = [...sanityServices, schoolCollegeTripsService];
+
   return (
     <main className="overflow-hidden">
       {/* Hero Section - Video Background */}
@@ -93,46 +108,6 @@ export default async function ServicesPage() {
                 service={service}
               />
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-brand-purple via-brand-purple to-brand-purple-dark relative overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Ready to Start Your Journey?
-          </h2>
-          <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-            Let our expert team help you plan your perfect trip. Get in touch
-            today and experience hassle-free travel planning.
-          </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            <Link
-              href="/packages"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-white text-brand-purple font-bold text-lg rounded-full hover:bg-gray-100 transition-all duration-300 hover:shadow-2xl hover:scale-105 group"
-            >
-              Browse Packages
-              <svg
-                className="w-6 h-6 group-hover:translate-x-1 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-transparent text-white font-bold text-lg rounded-full border-2 border-white hover:bg-white/10 transition-all duration-300"
-            >
-              Get In Touch
-            </Link>
           </div>
         </div>
       </section>

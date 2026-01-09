@@ -37,10 +37,18 @@ export default defineType({
     }),
     defineField({
       name: "icon",
-      title: "Icon",
+      title: "Icon Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+      description: "Upload an icon image for this service (recommended)",
+    }),
+    defineField({
+      name: "iconEmoji",
+      title: "Icon Emoji (Fallback)",
       type: "string",
-      description: "Emoji icon (e.g., ✈️, 🏨, 📄)",
-      validation: (Rule) => Rule.required(),
+      description: "Emoji icon as fallback if no image is uploaded (e.g., ✈️, 🏨, 📄)",
     }),
     defineField({
       name: "colorGradient",
@@ -80,12 +88,15 @@ export default defineType({
     select: {
       title: "title",
       icon: "icon",
+      iconEmoji: "iconEmoji",
       category: "category",
     },
-    prepare({ title, icon, category }) {
+    prepare({ title, icon, iconEmoji, category }) {
+      const displayIcon = iconEmoji || (typeof icon === "string" && !icon.startsWith("/") ? icon : "") || "";
       return {
-        title: `${icon || ""} ${title}`,
+        title: `${displayIcon} ${title}`,
         subtitle: category || "No category",
+        media: icon && typeof icon === "object" ? icon : undefined,
       };
     },
   },

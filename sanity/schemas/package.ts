@@ -65,6 +65,11 @@ export default defineType({
           { title: "International Holiday Packages", value: "international" },
           { title: "Domestic Holiday Packages", value: "domestic" },
           { title: "Fixed Departures", value: "fixedDeparture" },
+          { title: "School Study Tours", value: "school-study-tours" },
+          { title: "School Outbound Camps", value: "school-outbound-camps" },
+          { title: "College Study Tours", value: "college-study-tours" },
+          { title: "College Industrial Visits", value: "college-industrial-visits" },
+          { title: "College Outbound Camps", value: "college-outbound-camps" },
         ],
         layout: "radio",
       },
@@ -131,6 +136,11 @@ export default defineType({
         domestic: "Domestic",
         fixedDeparture: "Fixed Departure",
         specialised: "Specialised",
+        "school-study-tours": "School Study Tours",
+        "school-outbound-camps": "School Outbound Camps",
+        "college-study-tours": "College Study Tours",
+        "college-industrial-visits": "College Industrial Visits",
+        "college-outbound-camps": "College Outbound Camps",
       };
       const categoryLabel = categoryLabels[category] || category;
       const featuredLabel = isFeatured ? "⭐ Featured" : "";

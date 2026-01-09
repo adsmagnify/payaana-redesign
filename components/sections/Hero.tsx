@@ -8,19 +8,18 @@ import { useRouter } from "next/navigation";
 
 export default function Hero() {
   const router = useRouter();
-  const [searchData, setSearchData] = useState({
-    location: "",
-    checkIn: "",
-    checkOut: "",
-    participants: "",
-  });
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     // Navigate to packages with search params
-    const params = new URLSearchParams();
-    if (searchData.location) params.set("search", searchData.location);
-    router.push(`/packages?${params.toString()}`);
+    if (searchQuery.trim()) {
+      const params = new URLSearchParams();
+      params.set("search", searchQuery.trim());
+      router.push(`/packages?${params.toString()}`);
+    } else {
+      router.push("/packages");
+    }
   };
 
   return (
@@ -34,7 +33,7 @@ export default function Hero() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/home-hero.mp4" type="video/mp4" />
+          <source src="/home-hero.webm" type="video/webm" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/70" />
       </div>
@@ -61,134 +60,45 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Search/Booking Form Card */}
+        {/* Search Form Card */}
         <div className="container mx-auto px-4 pb-12 -mt-16 relative z-20">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                Find the best place
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                Search Packages & Destinations
               </h2>
 
-              <form onSubmit={handleSearch} className="space-y-6">
-                {/* Input Fields */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Location
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Type the destination"
-                      value={searchData.location}
-                      onChange={(e) =>
-                        setSearchData({
-                          ...searchData,
-                          location: e.target.value,
-                        })
-                      }
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Check In
-                    </label>
-                    <input
-                      type="date"
-                      placeholder="Add date"
-                      value={searchData.checkIn}
-                      onChange={(e) =>
-                        setSearchData({
-                          ...searchData,
-                          checkIn: e.target.value,
-                        })
-                      }
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Check Out
-                    </label>
-                    <input
-                      type="date"
-                      placeholder="Add date"
-                      value={searchData.checkOut}
-                      onChange={(e) =>
-                        setSearchData({
-                          ...searchData,
-                          checkOut: e.target.value,
-                        })
-                      }
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Participants
-                    </label>
-                    <input
-                      type="number"
-                      placeholder="Add guests"
-                      min="1"
-                      value={searchData.participants}
-                      onChange={(e) =>
-                        setSearchData({
-                          ...searchData,
-                          participants: e.target.value,
-                        })
-                      }
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent"
-                    />
-                  </div>
+              <form onSubmit={handleSearch} className="flex gap-4">
+                <div className="flex-1">
+                  <input
+                    type="text"
+                    placeholder="Search by destination, package name, or location..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-purple focus:border-brand-purple text-lg"
+                  />
                 </div>
-
-                {/* Filter Options and Search Button */}
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex flex-wrap items-center gap-4">
-                    <span className="text-sm font-medium text-gray-700">
-                      Filter:
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "All Packages",
-                        "Adventure",
-                        "Relaxation",
-                        "Cultural",
-                      ].map((filter) => (
-                        <button
-                          key={filter}
-                          type="button"
-                          className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full text-sm font-medium transition-colors"
-                        >
-                          {filter}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="bg-brand-purple hover:bg-brand-purple-dark text-white px-8 py-3 rounded-lg font-semibold flex items-center space-x-2 transition-colors"
+                <button
+                  type="submit"
+                  className="bg-brand-purple hover:bg-brand-purple-dark text-white px-8 py-4 rounded-xl font-semibold flex items-center space-x-2 transition-colors shadow-lg hover:shadow-xl"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <span>Search Packages</span>
-                  </button>
-                </div>
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  <span>Search</span>
+                </button>
               </form>
+              <p className="text-sm text-gray-500 mt-4 text-center">
+                Find packages and destinations by name, location, or description
+              </p>
             </div>
           </div>
         </div>

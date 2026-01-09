@@ -89,6 +89,8 @@ export async function getDestinationBySlug(slug: string) {
         mainImage,
         description,
         location,
+        type,
+        isPopular,
         "featuredPackages": *[_type == "packages" && references(^._id) && !(_id in path("drafts.**"))] {
           _id,
           title,
@@ -118,6 +120,7 @@ export async function getServices() {
         shortDescription,
         fullDescription,
         icon,
+        iconEmoji,
         colorGradient,
         category
       }
@@ -277,6 +280,7 @@ export async function getServiceBySlug(slug: string) {
         shortDescription,
         fullDescription,
         icon,
+        iconEmoji,
         colorGradient,
         category
       }

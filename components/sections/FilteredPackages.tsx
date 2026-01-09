@@ -34,7 +34,8 @@ export default function FilteredPackages({ packages }: FilteredPackagesProps) {
       filtered = filtered.filter(
         (pkg) =>
           pkg.title.toLowerCase().includes(searchLower) ||
-          pkg.description?.toLowerCase().includes(searchLower)
+          pkg.description?.toLowerCase().includes(searchLower) ||
+          pkg.destination?.name.toLowerCase().includes(searchLower)
       )
     }
     

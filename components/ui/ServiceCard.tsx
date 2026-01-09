@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
-import Image from "next/image";
+import SafeImage from "./SafeImage";
+import { urlFor } from "@/lib/sanity/image";
 
 // Service type that works with both Sanity and static data
 type ServiceData = {
@@ -8,7 +11,8 @@ type ServiceData = {
   title: string;
   shortDescription: string;
   fullDescription?: string;
-  icon: string;
+  icon?: any; // Can be Sanity image object, string path, or undefined
+  iconEmoji?: string;
   colorGradient: string;
   category?: string;
 };
@@ -24,7 +28,24 @@ export default function ServiceCard({ service }: ServiceCardProps) {
       ? service.slug
       : service.slug?.current || "";
 
-  const isImageIcon = service.icon.startsWith("/");
+  // Check if icon is a Sanity image object
+  const isSanityImage =
+    service.icon && typeof service.icon === "object" && service.icon.asset;
+  // Check if icon is a string path
+  const isStringPath =
+    typeof service.icon === "string" && service.icon.startsWith("/");
+  // Get emoji fallback
+  const emojiIcon =
+    service.iconEmoji ||
+    (typeof service.icon === "string" && !service.icon.startsWith("/")
+      ? service.icon
+      : null) ||
+    "✨";
+
+  // Get image URL if it's a Sanity image
+  const imageUrl = isSanityImage
+    ? urlFor(service.icon).width(400).height(400).url()
+    : null;
 
   return (
     <Link href={`/services/${slug}`} className="block h-full">
@@ -36,20 +57,33 @@ export default function ServiceCard({ service }: ServiceCardProps) {
 
         {/* Icon */}
         <div className="mx-auto transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-          {isImageIcon ? (
+          {isSanityImage && imageUrl ? (
             <div className="relative w-48 h-48 mx-auto">
-              <Image
+              <SafeImage
+                src={imageUrl}
+                alt={service.title}
+                fill
+                className="object-contain"
+                fallbackIcon={emojiIcon}
+                fallbackGradient={service.colorGradient}
+              />
+            </div>
+          ) : isStringPath ? (
+            <div className="relative w-48 h-48 mx-auto">
+              <SafeImage
                 src={service.icon}
                 alt={service.title}
                 fill
                 className="object-contain"
+                fallbackIcon={emojiIcon}
+                fallbackGradient={service.colorGradient}
               />
             </div>
           ) : (
             <div
               className={`w-32 h-32 mx-auto bg-gradient-to-br ${service.colorGradient} rounded-2xl flex items-center justify-center text-6xl shadow-lg`}
             >
-              {service.icon}
+              {emojiIcon}
             </div>
           )}
         </div>

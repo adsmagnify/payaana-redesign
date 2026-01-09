@@ -1,7 +1,9 @@
 import PackageSearchHero from "@/components/sections/PackageSearchHero";
+import PackageSearchBar from "@/components/sections/PackageSearchBar";
 import PackageCategorySection from "@/components/sections/PackageCategorySection";
-import PackageFilters from "@/components/sections/PackageFilters";
-import { getPackagesByCategoryWithDestinations } from "@/lib/sanity/queries";
+import SearchResultsSection from "@/components/sections/SearchResultsSection";
+import ConditionalCategorySections from "@/components/sections/ConditionalCategorySections";
+import { getPackagesByCategoryWithDestinations, getPackages } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/image";
 import { Suspense } from "react";
 
@@ -75,140 +77,155 @@ async function FixedDeparturesWrapper() {
   );
 }
 
+async function AllPackagesWrapper() {
+  const allPackages = await getPackages();
+  return <SearchResultsSection packages={allPackages} />;
+}
+
 export default function PackagesPage() {
   return (
     <main className="overflow-hidden">
       {/* Hero Section */}
       <PackageSearchHero />
 
-      {/* Search Section */}
+      {/* Search Bar Section */}
+      <PackageSearchBar />
+
+      {/* Search Results Section */}
       <section id="packages" className="py-12 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 tracking-tight">
-            Search Packages
-          </h2>
+          {/* Search Results - Only shows when there's a search query */}
           <Suspense
             fallback={
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  {[...Array(4)].map((_, i) => (
+              <div className="mt-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {[...Array(6)].map((_, i) => (
                     <div
                       key={i}
-                      className="h-10 bg-gray-200 rounded animate-pulse"
-                    />
+                      className="bg-white rounded-2xl overflow-hidden shadow-lg"
+                    >
+                      <div className="h-64 bg-gray-200 animate-pulse" />
+                      <div className="p-6">
+                        <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
+                        <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
             }
           >
-            <PackageFilters />
+            <AllPackagesWrapper />
           </Suspense>
         </div>
       </section>
 
-      {/* Specialised Destination Section */}
-      <Suspense
-        fallback={
-          <section className="py-20 bg-white">
-            <div className="container mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {[...Array(4)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="bg-white rounded-2xl overflow-hidden shadow-lg"
-                  >
-                    <div className="h-64 bg-gray-200 animate-pulse" />
-                    <div className="p-6">
-                      <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
-                      <div className="h-4 bg-gray-200 rounded animate-pulse" />
+      {/* Category Sections - Only show when there's no search query */}
+      <ConditionalCategorySections>
+        {/* Specialised Destination Section */}
+        <Suspense
+          fallback={
+            <section className="py-20 bg-white">
+              <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                  {[...Array(4)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="bg-white rounded-2xl overflow-hidden shadow-lg"
+                    >
+                      <div className="h-64 bg-gray-200 animate-pulse" />
+                      <div className="p-6">
+                        <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
+                        <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-        }
-      >
-        <SpecialisedDestinationsWrapper />
-      </Suspense>
+            </section>
+          }
+        >
+          <SpecialisedDestinationsWrapper />
+        </Suspense>
 
-      {/* International Holiday Packages Section */}
-      <Suspense
-        fallback={
-          <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-            <div className="container mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {[...Array(4)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="bg-white rounded-2xl overflow-hidden shadow-lg"
-                  >
-                    <div className="h-64 bg-gray-200 animate-pulse" />
-                    <div className="p-6">
-                      <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
-                      <div className="h-4 bg-gray-200 rounded animate-pulse" />
+        {/* International Holiday Packages Section */}
+        <Suspense
+          fallback={
+            <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+              <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                  {[...Array(4)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="bg-white rounded-2xl overflow-hidden shadow-lg"
+                    >
+                      <div className="h-64 bg-gray-200 animate-pulse" />
+                      <div className="p-6">
+                        <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
+                        <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-        }
-      >
-        <InternationalPackagesWrapper />
-      </Suspense>
+            </section>
+          }
+        >
+          <InternationalPackagesWrapper />
+        </Suspense>
 
-      {/* Domestic Holiday Packages Section */}
-      <Suspense
-        fallback={
-          <section className="py-20 bg-white">
-            <div className="container mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {[...Array(4)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="bg-white rounded-2xl overflow-hidden shadow-lg"
-                  >
-                    <div className="h-64 bg-gray-200 animate-pulse" />
-                    <div className="p-6">
-                      <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
-                      <div className="h-4 bg-gray-200 rounded animate-pulse" />
+        {/* Domestic Holiday Packages Section */}
+        <Suspense
+          fallback={
+            <section className="py-20 bg-white">
+              <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                  {[...Array(4)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="bg-white rounded-2xl overflow-hidden shadow-lg"
+                    >
+                      <div className="h-64 bg-gray-200 animate-pulse" />
+                      <div className="p-6">
+                        <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
+                        <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-        }
-      >
-        <DomesticPackagesWrapper />
-      </Suspense>
+            </section>
+          }
+        >
+          <DomesticPackagesWrapper />
+        </Suspense>
 
-      {/* Fixed Departures Section */}
-      <Suspense
-        fallback={
-          <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-            <div className="container mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {[...Array(4)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="bg-white rounded-2xl overflow-hidden shadow-lg"
-                  >
-                    <div className="h-64 bg-gray-200 animate-pulse" />
-                    <div className="p-6">
-                      <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
-                      <div className="h-4 bg-gray-200 rounded animate-pulse" />
+        {/* Fixed Departures Section */}
+        <Suspense
+          fallback={
+            <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+              <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                  {[...Array(4)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="bg-white rounded-2xl overflow-hidden shadow-lg"
+                    >
+                      <div className="h-64 bg-gray-200 animate-pulse" />
+                      <div className="p-6">
+                        <div className="h-6 bg-gray-200 rounded mb-4 animate-pulse" />
+                        <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-        }
-      >
-        <FixedDeparturesWrapper />
-      </Suspense>
+            </section>
+          }
+        >
+          <FixedDeparturesWrapper />
+        </Suspense>
+      </ConditionalCategorySections>
     </main>
   );
 }

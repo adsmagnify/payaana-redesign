@@ -12,6 +12,7 @@ export default function AboutPage() {
         "Specialized expertise in worldwide travel destinations with the lowest airfares and exclusive deals",
       icon: "/international-bookings.webp",
       color: "from-blue-400 to-indigo-500",
+      link: "/services",
     },
     {
       title: "Hotel Discounts",
@@ -19,6 +20,7 @@ export default function AboutPage() {
         "Exclusive discounts on hotel bookings across the globe for comfortable stays",
       icon: "/hotel-discounts.webp",
       color: "from-orange-400 to-red-500",
+      link: "/services",
     },
     {
       title: "Visa & Passport",
@@ -26,6 +28,7 @@ export default function AboutPage() {
         "Complete guidance on passport issuance, renewal and all kinds of visa procedures",
       icon: "/visa-passport.webp",
       color: "from-green-400 to-teal-500",
+      link: "/services",
     },
     {
       title: "Handcrafted Experiences",
@@ -33,6 +36,14 @@ export default function AboutPage() {
         "Personalized sightseeing itineraries tailored to your unique preferences",
       icon: "/handcrafted-experiences.webp",
       color: "from-brand-purple to-brand-purple-dark",
+      link: "/services",
+    },
+    {
+      title: "School/College Trips and Camps",
+      description: "Educational and adventure trips for schools and colleges",
+      icon: "/school-college-trips.webp",
+      color: "from-purple-400 to-pink-500",
+      link: "/services/school-college-trips",
     },
   ];
 
@@ -127,11 +138,6 @@ export default function AboutPage() {
 
             {/* Right - Content */}
             <div>
-              <div className="inline-block mb-4 px-4 py-1.5 bg-brand-purple/10 rounded-full">
-                <span className="text-brand-purple font-semibold text-sm uppercase tracking-wider">
-                  Who We Are
-                </span>
-              </div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 Your Journey Begins
                 <br />
@@ -189,10 +195,10 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
             {services.map((service) => (
               <div key={service.title} className="group relative">
-                <div className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden h-full text-center">
+                <div className="relative bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden h-full text-center">
                   {/* Gradient background on hover */}
                   <div
                     className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
@@ -303,11 +309,6 @@ export default function AboutPage() {
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-block mb-4 px-4 py-1.5 bg-brand-purple/10 rounded-full">
-              <span className="text-brand-purple font-semibold text-sm uppercase tracking-wider">
-                Something For Everyone
-              </span>
-            </div>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               We Cater To All Travel Needs
             </h2>
@@ -331,46 +332,6 @@ export default function AboutPage() {
                 </h3>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="pt-24 pb-20 bg-gradient-to-br from-brand-purple via-brand-purple to-brand-purple-dark relative overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Ready to Start Your Adventure?
-          </h2>
-          <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-            Join thousands of happy travelers who have discovered the world with
-            Payaana. Your dream destination awaits.
-          </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            <Link
-              href="/packages"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-white text-brand-purple font-bold text-lg rounded-full hover:bg-gray-100 transition-all duration-300 hover:shadow-2xl hover:scale-105 group"
-            >
-              Browse Packages
-              <svg
-                className="w-6 h-6 group-hover:translate-x-1 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-transparent text-white font-bold text-lg rounded-full border-2 border-white hover:bg-white/10 transition-all duration-300"
-            >
-              Get In Touch
-            </Link>
           </div>
         </div>
       </section>

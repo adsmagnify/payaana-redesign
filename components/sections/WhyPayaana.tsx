@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function WhyPayaana() {
   const features = [
@@ -6,21 +7,31 @@ export default function WhyPayaana() {
       image: "/personalized-packages.webp",
       title: "Personalized Packages",
       description: "Tailored travel experiences designed just for you",
+      link: "/packages",
     },
     {
       image: "/services-doorstep.webp",
       title: "Services at Your Doorstep",
       description: "Easy booking and reliable support, anytime, anywhere",
+      link: "/services",
     },
     {
       image: "/pocketfriendly-prices.webp",
       title: "Pocket-Friendly Prices",
       description: "Affordable travel packages without compromising quality",
+      link: "/packages",
     },
     {
-      image: "/superfast-services.webp", // Placeholder for Super Fast Service
+      image: "/superfast-services.webp",
       title: "Super Fast Service",
       description: "Quick bookings and instant confirmations",
+      link: "/services",
+    },
+    {
+      image: "/school-college-trips.webp",
+      title: "School/College Trips and Camps",
+      description: "Educational and adventure trips for schools and colleges",
+      link: "/services/school-college-trips",
     },
   ];
 
@@ -38,12 +49,15 @@ export default function WhyPayaana() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="group relative flex">
-              <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 w-full flex flex-col">
+            <div
+              key={index}
+              className="group relative flex"
+            >
+              <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 w-full flex flex-col">
                 {/* Icon/Image Container */}
-                <div className="relative w-56 h-52 mx-auto mb-6 flex items-center justify-center flex-shrink-0 bg-transparent">
+                <div className="relative w-48 h-44 mx-auto mb-4 flex items-center justify-center flex-shrink-0 bg-transparent">
                   {feature.image ? (
                     <div className="relative w-full h-full bg-transparent">
                       <Image
