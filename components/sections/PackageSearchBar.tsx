@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { handleSearchAction } from "@/lib/actions/search";
 
 export default function PackageSearchBar() {
   const router = useRouter();
@@ -38,8 +39,19 @@ export default function PackageSearchBar() {
     router.push(newUrl, { scroll: false });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // If only search text is provided, try intelligent redirect
+    if (filters.search && !filters.destination && !filters.priceRange && !filters.duration) {
+      const result = await handleSearchAction(filters.search);
+      if (result && result.url) {
+        router.push(result.url);
+        return;
+      }
+    }
+
+    // Otherwise standard filter behavior
     const params = new URLSearchParams();
     Object.entries(filters).forEach(([key, value]) => {
       if (value) params.set(key, value);

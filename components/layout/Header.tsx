@@ -14,7 +14,7 @@ export default function Header() {
       <nav className="container mx-auto px-4">
         <div className="flex items-center justify-center gap-4 relative">
           {/* Logo in white rounded pill - positioned absolute left */}
-          <Link href="/" className="absolute left-0 flex items-center">
+          <Link href="/" className="absolute left-0 flex items-center mt-5 lg:mt-0">
             <div className="bg-white rounded-full px-3 py-2 shadow-lg">
               <div className="relative w-32 h-10">
                 <Image
@@ -30,7 +30,7 @@ export default function Header() {
 
           {/* Header navigation in separate white rounded container - centered */}
           <div className="hidden lg:flex items-center">
-            <div className="bg-white rounded-full px-8 py-4 shadow-lg">
+            <div className="bg-white rounded-full px-8 py-4 shadow-lg ">
               <Navigation />
             </div>
           </div>
@@ -46,7 +46,7 @@ export default function Header() {
 
           {/* Mobile menu button - right aligned */}
           <button
-            className="lg:hidden absolute right-0 p-2 text-white bg-white/20 backdrop-blur-sm rounded-full"
+            className="lg:hidden absolute right-0 p-2 text-white bg-white/20 backdrop-blur-sm rounded-full mt-6 lg:mt-0"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -57,7 +57,8 @@ export default function Header() {
               strokeLinejoin="round"
               strokeWidth="2"
               viewBox="0 0 24 24"
-              stroke="currentColor"
+              stroke="currentColor
+              "
             >
               {mobileMenuOpen ? (
                 <path d="M6 18L18 6M6 6l12 12" />
@@ -69,7 +70,7 @@ export default function Header() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-4 bg-white rounded-2xl shadow-xl p-4">
+          <div className="lg:hidden mt-11 bg-white rounded-2xl shadow-xl p-4">
             <Navigation mobile />
             <div className="pt-4">
               <Link href="/packages">

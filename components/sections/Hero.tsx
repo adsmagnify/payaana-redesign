@@ -6,19 +6,32 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
 
+import { handleSearchAction } from "@/lib/actions/search";
+
 export default function Hero() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Navigate to packages with search params
-    if (searchQuery.trim()) {
-      const params = new URLSearchParams();
-      params.set("search", searchQuery.trim());
-      router.push(`/packages?${params.toString()}`);
-    } else {
+
+    if (!searchQuery.trim()) {
       router.push("/packages");
+      return;
+    }
+
+    setIsSearching(true);
+    try {
+      const result = await handleSearchAction(searchQuery);
+      if (result && result.url) {
+        router.push(result.url);
+      }
+    } catch (error) {
+      console.error("Search error:", error);
+      router.push(`/packages?search=${encodeURIComponent(searchQuery)}`);
+    } finally {
+      setIsSearching(false);
     }
   };
 
@@ -81,20 +94,27 @@ export default function Hero() {
                 </div>
                 <button
                   type="submit"
-                  className="bg-brand-purple hover:bg-brand-purple-dark text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold flex items-center justify-center space-x-2 transition-colors shadow-lg hover:shadow-xl"
+                  disabled={isSearching}
+                  className="bg-brand-purple hover:bg-brand-purple-dark text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold flex items-center justify-center space-x-2 transition-colors shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                  <span>Search</span>
+                  {isSearching ? (
+                    <span>Searching...</span>
+                  ) : (
+                    <>
+                      <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                      <span>Search</span>
+                    </>
+                  )}
                 </button>
               </form>
               <p className="text-sm text-gray-500 mt-4 text-center">

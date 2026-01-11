@@ -117,16 +117,15 @@ export default async function Footer() {
                     </svg>
                   </div>
                   <span className="text-sm leading-relaxed">
-                    50-12/1 Vishnu Vardhan Main Road (Uttarahalli Main Road),
-                    Opp DR Complex Subramanyapura Post Uttarahalli Bengaluru -
-                    560061
+                    50-12/1 Vishnu Vardhan Main Road,
+                    Uttarahalli, Bengaluru - 560061
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Services Section */}
-            <div>
+            {/* Services Section - Hidden on Mobile */}
+            <div className="hidden md:block">
               <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
                 <span className="w-1 h-6 bg-gradient-to-b from-brand-purple to-light-pink rounded-full"></span>
                 Services
@@ -154,7 +153,7 @@ export default async function Footer() {
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-purple opacity-0 group-hover:opacity-100 transition-opacity"></span>
                         <span className="group-hover:translate-x-1 transition-transform inline-block">
-                          School/College Trips and Camps
+                          School/College Trips
                         </span>
                       </Link>
                     </li>
@@ -167,8 +166,8 @@ export default async function Footer() {
               </ul>
             </div>
 
-            {/* International Packages */}
-            <div>
+            {/* International Packages - Hidden on Mobile */}
+            <div className="hidden md:block">
               <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
                 <span className="w-1 h-6 bg-gradient-to-b from-brand-purple to-light-pink rounded-full"></span>
                 International Packages
@@ -201,8 +200,8 @@ export default async function Footer() {
               </ul>
             </div>
 
-            {/* Domestic Packages */}
-            <div>
+            {/* Domestic Packages - Hidden on Mobile */}
+            <div className="hidden md:block">
               <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
                 <span className="w-1 h-6 bg-gradient-to-b from-brand-purple to-light-pink rounded-full"></span>
                 Domestic Packages
@@ -233,6 +232,27 @@ export default async function Footer() {
                   </li>
                 )}
               </ul>
+            </div>
+
+            {/* Mobile Only: Quick Links Accordion/List */}
+            <div className="md:hidden grid grid-cols-2 gap-4">
+              <div>
+                <h3 className="font-bold text-white mb-3 text-sm">Quick Links</h3>
+                <ul className="space-y-2">
+                  <li><Link href="/services" className="text-gray-300 text-sm">Services</Link></li>
+                  <li><Link href="/packages" className="text-gray-300 text-sm">Packages</Link></li>
+                  <li><Link href="/about" className="text-gray-300 text-sm">About Us</Link></li>
+                  <li><Link href="/contact" className="text-gray-300 text-sm">Contact</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-bold text-white mb-3 text-sm">Destinations</h3>
+                <ul className="space-y-2">
+                  <li><Link href="/packages?category=domestic" className="text-gray-300 text-sm">Domestic</Link></li>
+                  <li><Link href="/packages?category=international" className="text-gray-300 text-sm">International</Link></li>
+                  <li><Link href="/packages?category=fixedDeparture" className="text-gray-300 text-sm">Fixed Departure</Link></li>
+                </ul>
+              </div>
             </div>
           </div>
 
