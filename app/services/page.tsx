@@ -42,7 +42,7 @@ export default async function ServicesPage() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           >
-            <source src="/services-hero.webm" type="video/mp4" />
+            <source src="/services-hero.webm" type="video/webm" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
