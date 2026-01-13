@@ -51,7 +51,7 @@ export default async function Footer() {
             {/* Logo & About Section */}
             <div>
               <Link href="/" className="inline-block mb-6">
-                <div className="relative w-44 h-14">
+                <div className="relative w-64 h-20">
                   <Image
                     src="/payaana-logo.webp"
                     alt="Payaana Logo"

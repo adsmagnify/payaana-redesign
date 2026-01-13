@@ -39,21 +39,37 @@ export default defineType({
       name: "price",
       title: "Price (Starting from)",
       type: "number",
-      validation: (Rule) => Rule.required().min(0),
+      description: "Optional - Only show if filled",
+      validation: (Rule) => Rule.min(0),
     }),
     defineField({
       name: "duration",
       title: "Duration",
       type: "string",
-      description: 'e.g., "5 Days / 4 Nights"',
-      validation: (Rule) => Rule.required(),
+      description: 'e.g., "5 Days / 4 Nights" - Optional for School Programmes and College Outbounds',
+      validation: (Rule) => 
+        Rule.custom((duration, context) => {
+          const category = (context.document as any)?.category;
+          if (category === "school-programmes" || category === "college-outbounds") {
+            return true; // Optional for school/college trips
+          }
+          return duration ? true : "Duration is required for this category";
+        }),
     }),
     defineField({
       name: "destination",
       title: "Destination",
       type: "reference",
       to: [{ type: "destination" }],
-      validation: (Rule) => Rule.required(),
+      description: "Optional for School Programmes and College Outbounds (use Locations field instead)",
+      validation: (Rule) => 
+        Rule.custom((destination, context) => {
+          const category = (context.document as any)?.category;
+          if (category === "school-programmes" || category === "college-outbounds") {
+            return true; // Optional for school/college trips
+          }
+          return destination ? true : "Destination is required for this category";
+        }),
     }),
     defineField({
       name: "category",
@@ -65,6 +81,9 @@ export default defineType({
           { title: "International Holiday Packages", value: "international" },
           { title: "Domestic Holiday Packages", value: "domestic" },
           { title: "Fixed Departures", value: "fixedDeparture" },
+          { title: "School Programmes", value: "school-programmes" },
+          { title: "College Outbounds", value: "college-outbounds" },
+          // Legacy categories (kept for backward compatibility)
           { title: "School Study Tours", value: "school-study-tours" },
           { title: "School Outbound Camps", value: "school-outbound-camps" },
           { title: "College Study Tours", value: "college-study-tours" },
@@ -75,6 +94,30 @@ export default defineType({
       },
       description: "Category for organizing packages on the packages page",
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "type",
+      title: "Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Study Tours", value: "study-tours" },
+          { title: "Outbound Camps", value: "outbound-camps" },
+          { title: "Industrial Visits", value: "industrial-visits" },
+        ],
+        layout: "radio",
+      },
+      description: "Type of trip (only for School Programmes and College Outbounds)",
+      hidden: ({ document }) => 
+        document?.category !== "school-programmes" && 
+        document?.category !== "college-outbounds",
+    }),
+    defineField({
+      name: "locations",
+      title: "Locations",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "Multiple locations for this trip (e.g., ['Delhi', 'Agra', 'Jaipur'])",
     }),
     defineField({
       name: "isFeatured",
@@ -136,6 +179,8 @@ export default defineType({
         domestic: "Domestic",
         fixedDeparture: "Fixed Departure",
         specialised: "Specialised",
+        "school-programmes": "School Programmes",
+        "college-outbounds": "College Outbounds",
         "school-study-tours": "School Study Tours",
         "school-outbound-camps": "School Outbound Camps",
         "college-study-tours": "College Study Tours",

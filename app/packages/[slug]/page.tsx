@@ -39,6 +39,8 @@ type TravelPackage = {
   highlights?: string[];
   itinerary?: ItineraryDay[];
   category?: string;
+  type?: string;
+  locations?: string[];
 };
 
 /* =========================
@@ -120,7 +122,26 @@ export default async function PackageDetailPage({
           </div>
         )}
         <div className="container mx-auto px-4 text-center relative z-10">
-          {packageData.destination && (
+          {/* Show locations for school/college trips, destination for others */}
+          {(packageData.locations && packageData.locations.length > 0) ? (
+            <div className="inline-block mb-6 px-5 py-2 bg-brand-purple/10 border-2 border-brand-purple/30 rounded-full shadow-md">
+              <div className="text-white/90 text-sm font-medium uppercase tracking-wider flex items-center gap-2 justify-center">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                {packageData.locations.join(", ")}
+              </div>
+            </div>
+          ) : packageData.destination ? (
             <div className="inline-block mb-6 px-5 py-2 bg-brand-purple/10 border-2 border-brand-purple/30 rounded-full shadow-md">
               <Link
                 href={
@@ -145,7 +166,7 @@ export default async function PackageDetailPage({
                 {packageData.destination.name}
               </Link>
             </div>
-          )}
+          ) : null}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight">
             {packageData.title}
           </h1>
@@ -217,7 +238,35 @@ export default async function PackageDetailPage({
               </div>
             )}
 
-            {packageData.destination && (
+            {/* Show locations for school/college trips, destination for others */}
+            {(packageData.locations && packageData.locations.length > 0) ? (
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-6 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-secondary-green rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg
+                      className="w-6 h-6 text-white"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600 font-medium">
+                      Locations
+                    </p>
+                    <p className="text-xl font-bold text-gray-900 mt-1">
+                      {packageData.locations.join(", ")}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : packageData.destination ? (
               <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-6 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-secondary-green rounded-xl flex items-center justify-center flex-shrink-0">
@@ -244,7 +293,7 @@ export default async function PackageDetailPage({
                   </div>
                 </div>
               </div>
-            )}
+            ) : null}
           </div>
         </div>
       </section>

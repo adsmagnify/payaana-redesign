@@ -12,6 +12,9 @@ export async function getPackages() {
         duration,
         description,
         highlights,
+        category,
+        type,
+        locations,
         destination-> {
           _id,
           name,
@@ -39,6 +42,9 @@ export async function getPackageBySlug(slug: string) {
         duration,
         description,
         highlights,
+        category,
+        type,
+        locations,
         itinerary[] {
           title,
           description
@@ -188,6 +194,8 @@ export async function getPackagesByCategory(category: string) {
         description,
         highlights,
         category,
+        type,
+        locations,
         isFeatured,
         destination-> {
           _id,

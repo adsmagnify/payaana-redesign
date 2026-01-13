@@ -30,12 +30,13 @@ export default function GalleryClient({
 
   const categories = [
     { value: "all", label: "All" },
-    { value: "adventure", label: categoryLabels.adventure || "Adventure" },
-    { value: "nature", label: categoryLabels.nature || "Nature" },
-    { value: "culture", label: categoryLabels.culture || "Culture" },
     {
       value: "happyCustomers",
       label: categoryLabels.happyCustomers || "Happy Customers",
+    },
+    {
+      value: "schoolCollegeTrips",
+      label: categoryLabels.schoolCollegeTrips || "School/College Trips",
     },
   ];
 

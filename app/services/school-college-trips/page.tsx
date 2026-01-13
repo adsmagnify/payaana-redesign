@@ -22,6 +22,8 @@ interface Package {
   price?: number;
   duration?: string;
   description?: string;
+  type?: string;
+  locations?: string[];
   destination?: {
     name: string;
     slug: { current: string };
@@ -50,6 +52,11 @@ function TripSection({ title, packages }: TripSectionProps) {
             : (pkg as any).imageUrl ||
               "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80";
 
+          // Get locations - prefer locations array, fallback to destination name
+          const displayLocations = pkg.locations && pkg.locations.length > 0
+            ? pkg.locations.join(", ")
+            : pkg.destination?.name || "Location TBD";
+
           return (
             <Link
               key={pkg._id}
@@ -76,25 +83,26 @@ function TripSection({ title, packages }: TripSectionProps) {
 
                   {/* Location and Duration */}
                   <div className="space-y-2 mb-4 flex-grow">
-                    {pkg.destination?.name && (
-                      <div className="flex items-center gap-2 text-gray-700">
-                        <svg
-                          className="w-5 h-5 text-brand-purple flex-shrink-0"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span className="text-sm font-medium">
-                          {pkg.destination.name}
-                        </span>
-                      </div>
-                    )}
+                    {/* Locations */}
+                    <div className="flex items-start gap-2 text-gray-700">
+                      <svg
+                        className="w-5 h-5 text-brand-purple flex-shrink-0 mt-0.5"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      <span className="text-sm font-medium">
+                        {displayLocations}
+                      </span>
+                    </div>
+                    
+                    {/* Duration */}
                     {pkg.duration && (
                       <div className="flex items-center gap-2 text-gray-700">
                         <svg
@@ -113,6 +121,8 @@ function TripSection({ title, packages }: TripSectionProps) {
                         </span>
                       </div>
                     )}
+                    
+                    {/* Price - Only show if exists */}
                     {pkg.price && (
                       <div className="flex items-center gap-2 text-gray-700">
                         <svg
@@ -159,33 +169,42 @@ function TripSection({ title, packages }: TripSectionProps) {
 }
 
 export default async function SchoolCollegeTripsPage() {
-  // Fetch packages for all 5 categories
-  const [
-    schoolStudyTours,
-    schoolOutboundCamps,
-    collegeStudyTours,
-    collegeIndustrialVisits,
-    collegeOutboundCamps,
-  ] = await Promise.all([
-    getPackagesByCategory("school-study-tours"),
-    getPackagesByCategory("school-outbound-camps"),
-    getPackagesByCategory("college-study-tours"),
-    getPackagesByCategory("college-industrial-visits"),
-    getPackagesByCategory("college-outbound-camps"),
+  // Fetch packages from new categories
+  const [schoolProgrammes, collegeOutbounds] = await Promise.all([
+    getPackagesByCategory("school-programmes"),
+    getPackagesByCategory("college-outbounds"),
   ]);
 
-  // Dummy data for demonstration (remove when real data is available)
-  const dummyTrips = {
+  // Group by type
+  const schoolStudyTours = schoolProgrammes.filter(
+    (pkg: Package) => pkg.type === "study-tours"
+  );
+  const schoolOutboundCamps = schoolProgrammes.filter(
+    (pkg: Package) => pkg.type === "outbound-camps"
+  );
+  const collegeStudyTours = collegeOutbounds.filter(
+    (pkg: Package) => pkg.type === "study-tours"
+  );
+  const collegeOutboundCamps = collegeOutbounds.filter(
+    (pkg: Package) => pkg.type === "outbound-camps"
+  );
+  const collegeIndustrialVisits = collegeOutbounds.filter(
+    (pkg: Package) => pkg.type === "industrial-visits"
+  );
+
+  // Use Sanity data if available, otherwise use dummy data as fallback
+  const trips = {
     schoolStudyTours:
-      schoolStudyTours.length === 0
-        ? [
+      schoolStudyTours.length > 0
+        ? schoolStudyTours
+        : [
             {
               _id: "dummy-1",
               title: "Historical Sites Study Tour",
               slug: { current: "historical-sites" },
               price: 15000,
-              duration: "3 Days / 2 Nights",
-              destination: { name: "Delhi, Agra" },
+              duration: "4 Days / 3 Nights",
+              locations: ["Delhi", "Agra", "Jaipur"],
               imageUrl:
                 "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80",
             },
@@ -193,9 +212,8 @@ export default async function SchoolCollegeTripsPage() {
               _id: "dummy-2",
               title: "Science Museum Tour",
               slug: { current: "science-museum" },
-              price: 8000,
               duration: "2 Days / 1 Night",
-              destination: { name: "Bangalore" },
+              locations: ["Bangalore"],
               imageUrl:
                 "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80",
             },
@@ -205,7 +223,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "cultural-heritage" },
               price: 12000,
               duration: "3 Days / 2 Nights",
-              destination: { name: "Mysore" },
+              locations: ["Mysore", "Coorg"],
               imageUrl:
                 "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
             },
@@ -215,7 +233,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "wildlife-safari" },
               price: 18000,
               duration: "4 Days / 3 Nights",
-              destination: { name: "Bandipur" },
+              locations: ["Bandipur", "Mysore"],
               imageUrl:
                 "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
             },
@@ -223,9 +241,8 @@ export default async function SchoolCollegeTripsPage() {
               _id: "dummy-13",
               title: "Space Center Visit",
               slug: { current: "space-center" },
-              price: 6000,
               duration: "1 Day",
-              destination: { name: "Bangalore" },
+              locations: ["Bangalore"],
               imageUrl:
                 "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=800&q=80",
             },
@@ -235,22 +252,22 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "coastal-tour" },
               price: 14000,
               duration: "3 Days / 2 Nights",
-              destination: { name: "Goa" },
+              locations: ["Goa", "Mumbai"],
               imageUrl:
                 "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
             },
-          ]
-        : schoolStudyTours,
+          ],
     schoolOutboundCamps:
-      schoolOutboundCamps.length === 0
-        ? [
+      schoolOutboundCamps.length > 0
+        ? schoolOutboundCamps
+        : [
             {
               _id: "dummy-3",
               title: "Adventure Camp - Ooty",
               slug: { current: "ooty-camp" },
               price: 12000,
               duration: "4 Days / 3 Nights",
-              destination: { name: "Ooty" },
+              locations: ["Ooty", "Coonoor"],
               imageUrl:
                 "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
             },
@@ -260,7 +277,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "coorg-camp" },
               price: 10000,
               duration: "3 Days / 2 Nights",
-              destination: { name: "Coorg" },
+              locations: ["Coorg"],
               imageUrl:
                 "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
             },
@@ -270,7 +287,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "manali-trek" },
               price: 16000,
               duration: "5 Days / 4 Nights",
-              destination: { name: "Manali" },
+              locations: ["Manali", "Solang Valley"],
               imageUrl:
                 "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
             },
@@ -280,7 +297,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "rafting-camp" },
               price: 11000,
               duration: "3 Days / 2 Nights",
-              destination: { name: "Rishikesh" },
+              locations: ["Rishikesh"],
               imageUrl:
                 "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80",
             },
@@ -290,7 +307,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "beach-camp" },
               price: 13000,
               duration: "4 Days / 3 Nights",
-              destination: { name: "Pondicherry" },
+              locations: ["Pondicherry", "Mahabalipuram"],
               imageUrl:
                 "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
             },
@@ -300,22 +317,22 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "climbing-camp" },
               price: 20000,
               duration: "6 Days / 5 Nights",
-              destination: { name: "Himachal" },
+              locations: ["Himachal Pradesh", "Manali"],
               imageUrl:
                 "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
             },
-          ]
-        : schoolOutboundCamps,
+          ],
     collegeStudyTours:
-      collegeStudyTours.length === 0
-        ? [
+      collegeStudyTours.length > 0
+        ? collegeStudyTours
+        : [
             {
               _id: "dummy-5",
               title: "Tech Industry Study Tour",
               slug: { current: "tech-tour" },
               price: 20000,
               duration: "5 Days / 4 Nights",
-              destination: { name: "Bangalore, Hyderabad" },
+              locations: ["Bangalore", "Hyderabad"],
               imageUrl:
                 "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80",
             },
@@ -325,7 +342,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "heritage-tour" },
               price: 18000,
               duration: "4 Days / 3 Nights",
-              destination: { name: "Rajasthan" },
+              locations: ["Jaipur", "Udaipur", "Jodhpur"],
               imageUrl:
                 "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80",
             },
@@ -335,7 +352,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "finance-tour" },
               price: 22000,
               duration: "5 Days / 4 Nights",
-              destination: { name: "Mumbai" },
+              locations: ["Mumbai"],
               imageUrl:
                 "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
             },
@@ -345,7 +362,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "media-tour" },
               price: 19000,
               duration: "4 Days / 3 Nights",
-              destination: { name: "Delhi" },
+              locations: ["Delhi", "Noida"],
               imageUrl:
                 "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80",
             },
@@ -355,7 +372,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "architecture-tour" },
               price: 17000,
               duration: "4 Days / 3 Nights",
-              destination: { name: "Ahmedabad" },
+              locations: ["Ahmedabad", "Vadodara"],
               imageUrl:
                 "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=800&q=80",
             },
@@ -365,22 +382,22 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "agriculture-tour" },
               price: 15000,
               duration: "3 Days / 2 Nights",
-              destination: { name: "Punjab" },
+              locations: ["Punjab", "Haryana"],
               imageUrl:
                 "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&q=80",
             },
-          ]
-        : collegeStudyTours,
+          ],
     collegeIndustrialVisits:
-      collegeIndustrialVisits.length === 0
-        ? [
+      collegeIndustrialVisits.length > 0
+        ? collegeIndustrialVisits
+        : [
             {
               _id: "dummy-7",
               title: "IT Companies Industrial Visit",
               slug: { current: "it-visit" },
               price: 5000,
               duration: "1 Day",
-              destination: { name: "Bangalore" },
+              locations: ["Bangalore"],
               imageUrl:
                 "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80",
             },
@@ -390,7 +407,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "manufacturing-visit" },
               price: 6000,
               duration: "1 Day",
-              destination: { name: "Mumbai" },
+              locations: ["Mumbai", "Pune"],
               imageUrl:
                 "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
             },
@@ -400,7 +417,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "automobile-visit" },
               price: 5500,
               duration: "1 Day",
-              destination: { name: "Chennai" },
+              locations: ["Chennai"],
               imageUrl:
                 "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80",
             },
@@ -410,7 +427,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "pharma-visit" },
               price: 5000,
               duration: "1 Day",
-              destination: { name: "Hyderabad" },
+              locations: ["Hyderabad"],
               imageUrl:
                 "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80",
             },
@@ -420,7 +437,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "textile-visit" },
               price: 4500,
               duration: "1 Day",
-              destination: { name: "Tirupur" },
+              locations: ["Tirupur", "Coimbatore"],
               imageUrl:
                 "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
             },
@@ -430,22 +447,22 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "research-visit" },
               price: 6000,
               duration: "1 Day",
-              destination: { name: "Bangalore" },
+              locations: ["Bangalore"],
               imageUrl:
                 "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80",
             },
-          ]
-        : collegeIndustrialVisits,
+          ],
     collegeOutboundCamps:
-      collegeOutboundCamps.length === 0
-        ? [
+      collegeOutboundCamps.length > 0
+        ? collegeOutboundCamps
+        : [
             {
               _id: "dummy-9",
               title: "Leadership Camp - Manali",
               slug: { current: "manali-camp" },
               price: 15000,
               duration: "5 Days / 4 Nights",
-              destination: { name: "Manali" },
+              locations: ["Manali"],
               imageUrl:
                 "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
             },
@@ -455,7 +472,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "goa-camp" },
               price: 14000,
               duration: "4 Days / 3 Nights",
-              destination: { name: "Goa" },
+              locations: ["Goa"],
               imageUrl:
                 "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
             },
@@ -465,7 +482,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "corporate-camp" },
               price: 18000,
               duration: "5 Days / 4 Nights",
-              destination: { name: "Lonavala" },
+              locations: ["Lonavala", "Khandala"],
               imageUrl:
                 "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
             },
@@ -475,7 +492,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "adventure-leadership" },
               price: 16000,
               duration: "4 Days / 3 Nights",
-              destination: { name: "Rishikesh" },
+              locations: ["Rishikesh"],
               imageUrl:
                 "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80",
             },
@@ -485,7 +502,7 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "communication-camp" },
               price: 12000,
               duration: "3 Days / 2 Nights",
-              destination: { name: "Ooty" },
+              locations: ["Ooty"],
               imageUrl:
                 "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
             },
@@ -495,12 +512,11 @@ export default async function SchoolCollegeTripsPage() {
               slug: { current: "entrepreneurship-camp" },
               price: 20000,
               duration: "6 Days / 5 Nights",
-              destination: { name: "Bangalore" },
+              locations: ["Bangalore"],
               imageUrl:
                 "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
             },
-          ]
-        : collegeOutboundCamps,
+          ],
   };
 
   return (
@@ -553,13 +569,13 @@ export default async function SchoolCollegeTripsPage() {
             {/* Study Tours */}
             <TripSection
               title="Study Tours"
-              packages={dummyTrips.schoolStudyTours as Package[]}
+              packages={trips.schoolStudyTours as Package[]}
             />
 
             {/* Outbound Camps */}
             <TripSection
               title="Outbound Camps"
-              packages={dummyTrips.schoolOutboundCamps as Package[]}
+              packages={trips.schoolOutboundCamps as Package[]}
             />
           </div>
 
@@ -579,19 +595,19 @@ export default async function SchoolCollegeTripsPage() {
             {/* Study Tours */}
             <TripSection
               title="Study Tours"
-              packages={dummyTrips.collegeStudyTours as Package[]}
+              packages={trips.collegeStudyTours as Package[]}
             />
 
             {/* Industrial Visits */}
             <TripSection
               title="Industrial Visits"
-              packages={dummyTrips.collegeIndustrialVisits as Package[]}
+              packages={trips.collegeIndustrialVisits as Package[]}
             />
 
             {/* Outbound Camps */}
             <TripSection
               title="Outbound Camps"
-              packages={dummyTrips.collegeOutboundCamps as Package[]}
+              packages={trips.collegeOutboundCamps as Package[]}
             />
           </div>
         </div>

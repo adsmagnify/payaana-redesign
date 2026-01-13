@@ -1,0 +1,810 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "mainImage",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Optional - Only show if filled",
+        "name": "price",
+        "type": "number",
+        "title": "Price (Starting from)"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "e.g., \"5 Days / 4 Nights\" - Optional for School Programmes and College Outbounds",
+        "name": "duration",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Optional for School Programmes and College Outbounds (use Locations field instead)",
+        "to": [
+          {
+            "type": "destination"
+          }
+        ],
+        "name": "destination",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Specialised Destination",
+              "value": "specialised"
+            },
+            {
+              "title": "International Holiday Packages",
+              "value": "international"
+            },
+            {
+              "title": "Domestic Holiday Packages",
+              "value": "domestic"
+            },
+            {
+              "title": "Fixed Departures",
+              "value": "fixedDeparture"
+            },
+            {
+              "title": "School Programmes",
+              "value": "school-programmes"
+            },
+            {
+              "title": "College Outbounds",
+              "value": "college-outbounds"
+            },
+            {
+              "title": "School Study Tours",
+              "value": "school-study-tours"
+            },
+            {
+              "title": "School Outbound Camps",
+              "value": "school-outbound-camps"
+            },
+            {
+              "title": "College Study Tours",
+              "value": "college-study-tours"
+            },
+            {
+              "title": "College Industrial Visits",
+              "value": "college-industrial-visits"
+            },
+            {
+              "title": "College Outbound Camps",
+              "value": "college-outbound-camps"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "specialised",
+                  "international",
+                  "domestic",
+                  "fixedDeparture",
+                  "school-programmes",
+                  "college-outbounds",
+                  "school-study-tours",
+                  "school-outbound-camps",
+                  "college-study-tours",
+                  "college-industrial-visits",
+                  "college-outbound-camps"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Category for organizing packages on the packages page",
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Study Tours",
+              "value": "study-tours"
+            },
+            {
+              "title": "Outbound Camps",
+              "value": "outbound-camps"
+            },
+            {
+              "title": "Industrial Visits",
+              "value": "industrial-visits"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Type of trip (only for School Programmes and College Outbounds)",
+        "hidden": "conditional",
+        "name": "type",
+        "type": "string"
+      },
+      {
+        "description": "Multiple locations for this trip (e.g., ['Delhi', 'Agra', 'Jaipur'])",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "locations",
+        "type": "array"
+      },
+      {
+        "initialValue": false,
+        "description": "Mark as featured to show on home page",
+        "name": "isFeatured",
+        "type": "boolean"
+      },
+      {
+        "initialValue": 0,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Order in which packages appear within category (lower numbers first)",
+        "name": "displayOrder",
+        "type": "number"
+      },
+      {
+        "description": "Key highlights of this package",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "highlights",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Day Title"
+              },
+              {
+                "name": "description",
+                "type": "text"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "itinerary",
+        "type": "array"
+      }
+    ],
+    "name": "packages",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "name",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "mainImage",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "description": "Full location address or region",
+        "name": "location",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Domestic",
+              "value": "domestic"
+            },
+            {
+              "title": "International",
+              "value": "international"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "domestic",
+                  "international"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Whether this is a domestic or international destination",
+        "name": "type",
+        "type": "string"
+      },
+      {
+        "initialValue": false,
+        "description": "Mark as popular to show on home page",
+        "name": "isPopular",
+        "type": "boolean"
+      },
+      {
+        "initialValue": 0,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Order in which destinations appear (lower numbers first)",
+        "name": "displayOrder",
+        "type": "number"
+      }
+    ],
+    "name": "destination",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 200
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Brief description shown on service cards",
+        "name": "shortDescription",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Complete description shown on service detail page",
+        "name": "fullDescription",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Upload an icon image for this service (recommended)",
+        "name": "icon",
+        "type": "image",
+        "title": "Icon Image"
+      },
+      {
+        "description": "Emoji icon as fallback if no image is uploaded (e.g., ✈️, 🏨, 📄)",
+        "name": "iconEmoji",
+        "type": "string",
+        "title": "Icon Emoji (Fallback)"
+      },
+      {
+        "initialValue": "from-blue-400 to-indigo-500",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Tailwind gradient classes (e.g., from-blue-400 to-indigo-500)",
+        "name": "colorGradient",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Booking",
+              "value": "Booking"
+            },
+            {
+              "title": "Documentation",
+              "value": "Documentation"
+            },
+            {
+              "title": "Planning",
+              "value": "Planning"
+            },
+            {
+              "title": "Protection",
+              "value": "Protection"
+            },
+            {
+              "title": "Financial",
+              "value": "Financial"
+            },
+            {
+              "title": "Connectivity",
+              "value": "Connectivity"
+            }
+          ]
+        },
+        "description": "Service category (e.g., Booking, Documentation, Planning)",
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "initialValue": 0,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Order in which services appear (lower numbers first)",
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      }
+    ],
+    "name": "services",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Upload an image for the gallery",
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Title or caption for the image",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "description": "Alternative text for accessibility (auto-filled from title if left empty)",
+        "name": "alt",
+        "type": "string",
+        "title": "Alt Text"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Happy Customers",
+              "value": "happyCustomers"
+            },
+            {
+              "title": "School/College Trips",
+              "value": "schoolCollegeTrips"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "happyCustomers",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "happyCustomers",
+                  "schoolCollegeTrips"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "initialValue": 0,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Order in which the image appears (lower numbers appear first)",
+        "name": "displayOrder",
+        "type": "number"
+      }
+    ],
+    "name": "gallery",
+    "type": "document",
+    "title": "Gallery Image"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "description": "Optional phone number",
+        "name": "phone",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "message",
+        "type": "text"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Contact Form",
+              "value": "contact"
+            },
+            {
+              "title": "Package Inquiry",
+              "value": "package"
+            },
+            {
+              "title": "Service Inquiry",
+              "value": "service"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "contact",
+        "description": "Where did this lead come from?",
+        "name": "source",
+        "type": "string"
+      },
+      {
+        "description": "If this is a package inquiry, link to the package",
+        "name": "packageId",
+        "type": "string",
+        "title": "Related Package ID"
+      },
+      {
+        "description": "Name of the package they inquired about",
+        "name": "packageName",
+        "type": "string",
+        "title": "Related Package Name"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "New",
+              "value": "new"
+            },
+            {
+              "title": "Contacted",
+              "value": "contacted"
+            },
+            {
+              "title": "Qualified",
+              "value": "qualified"
+            },
+            {
+              "title": "Converted",
+              "value": "converted"
+            },
+            {
+              "title": "Closed",
+              "value": "closed"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "new",
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "description": "When was this lead submitted?",
+        "name": "submittedAt",
+        "type": "datetime"
+      },
+      {
+        "description": "Internal notes about this lead (not visible to customer)",
+        "name": "notes",
+        "type": "text",
+        "title": "Internal Notes"
+      }
+    ],
+    "name": "lead",
+    "type": "document"
+  }
+]

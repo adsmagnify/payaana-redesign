@@ -13,10 +13,10 @@ export default function Header() {
     <header className="absolute top-0 left-0 right-0 z-50 bg-transparent pt-8">
       <nav className="container mx-auto px-4">
         <div className="flex items-center justify-center gap-4 relative">
-          {/* Logo in white rounded pill - positioned absolute left */}
+          {/* Logo in custom color rounded pill - positioned absolute left */}
           <Link href="/" className="absolute left-0 flex items-center mt-5 lg:mt-0">
-            <div className="bg-white rounded-full px-3 py-2 shadow-lg">
-              <div className="relative w-32 h-10">
+            <div className="rounded-full px-3 py-2 shadow-lg" style={{ backgroundColor: '#f9f8f6' }}>
+              <div className="relative w-40 h-12">
                 <Image
                   src="/payaana-logo.webp"
                   alt="Payaana Logo"

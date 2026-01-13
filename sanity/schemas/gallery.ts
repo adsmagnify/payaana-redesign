@@ -35,15 +35,13 @@ export default defineType({
       type: "string",
       options: {
         list: [
-          { title: "Adventure", value: "adventure" },
-          { title: "Nature", value: "nature" },
-          { title: "Culture", value: "culture" },
           { title: "Happy Customers", value: "happyCustomers" },
+          { title: "School/College Trips", value: "schoolCollegeTrips" },
         ],
         layout: "radio",
       },
       validation: (Rule) => Rule.required(),
-      initialValue: "adventure",
+      initialValue: "happyCustomers",
     }),
     defineField({
       name: "displayOrder",
@@ -63,10 +61,8 @@ export default defineType({
     },
     prepare({ title, category, media }) {
       const categoryLabels: Record<string, string> = {
-        adventure: "Adventure",
-        nature: "Nature",
-        culture: "Culture",
         happyCustomers: "Happy Customers",
+        schoolCollegeTrips: "School/College Trips",
       };
       return {
         title: title || "Untitled",

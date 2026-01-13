@@ -14,10 +14,8 @@ export default async function GalleryPage() {
   const images = await getGalleryImages();
 
   const categoryLabels: Record<string, string> = {
-    adventure: "Adventure",
-    nature: "Nature",
-    culture: "Culture",
     happyCustomers: "Happy Customers",
+    schoolCollegeTrips: "School/College Trips",
   };
 
   return (
